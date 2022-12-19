@@ -1,0 +1,31 @@
+import { Route, Routes } from 'react-router-dom'
+import Navbar from '../Components/Navbar'
+
+
+export default function MainRouter() {
+
+   const Inicio = () => <h1>Inicio</h1>
+   const Hombre = () => <h1>hombre</h1>
+   const Accesorios = () => <h1>accesorios</h1>
+   const Zapatos = () => <h1>zapatos</h1>
+   const Sale = () => <h1>sale</h1>
+
+   const Error = () => <h1>error</h1>
+
+   return (
+      <>
+         {/* <br />
+         <br /> */}
+         <Navbar />
+         <Routes>
+            <Route path='/' element={<Inicio />} />
+            <Route path='/hombre' element={<Hombre />} />
+            <Route path='/accesorios' element={<Accesorios />} />
+            <Route path='/zapatos' element={<Zapatos />} />
+            <Route path='/Sale' element={<Sale />} />
+            {/* <Route path='/mis_cursos/:courseId' element={<Curso_Detalle />} /> */}
+            <Route path='*' element={<Error />} />
+         </Routes>
+      </>
+   )
+}

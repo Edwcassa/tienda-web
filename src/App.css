@@ -33,3 +33,6 @@
     animation: logo-spin infinite 20s linear;
   }
 } */
+.App {
+   border: 2px solid yellowgreen;
+}
