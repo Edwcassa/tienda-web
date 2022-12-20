@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
+import Inicio from '../Pages/Inicio'
 
 
 export default function MainRouter() {
 
-   const Inicio = () => <h1>Inicio</h1>
    const Hombre = () => <h1>hombre</h1>
    const Accesorios = () => <h1>accesorios</h1>
    const Zapatos = () => <h1>zapatos</h1>
