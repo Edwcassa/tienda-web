@@ -2,12 +2,16 @@ import Modal from '../Modal'
 import close from '../../assets/close.svg'
 
 interface props {
+   view: boolean,
    setView: (flag: boolean) => void
 }
 
-export default function ModalNewsletter({ setView }: props) {
+export default function ModalNewsletter({ view, setView }: props) {
    return (
-      <Modal visible = {setView}>
+      <Modal
+         visible={view}
+         setVisible={setView}
+      >
          <div className="flex flex-1 h-full">
             <div className="w-6/12 p-2">
                <img

@@ -2,13 +2,15 @@ import Modal from '../Modal'
 // import close from '../../assets/close.svg'
 
 interface props {
+   view: boolean,
    setView: (flag: boolean) => void
 }
 
-export default function ModalEnvios({ setView }: props) {
+export default function ModalEnvios({ view, setView }: props) {
    return (
       <Modal
-         visible={setView}
+         visible={view}
+         setVisible={setView}
          small={true}
       >
          <div className="flex flex-1 h-full">
