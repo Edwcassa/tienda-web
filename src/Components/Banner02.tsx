@@ -13,7 +13,7 @@ export default function Banner02({ img, text, text2, text3, text4, text5, link }
    return (
       <>
          <div className=" relative border-0 border-blue-600 flex justify-center items-center">
-            <img className="mx-auto select-none" src={img} alt="" />
+            <img className="mx-auto select-none object-cover" src={img} alt="" />
             <div className="absolute flex flex-col text-black">
                <span className="text-center text-5xl font-semibold ">{text}</span>
                <span className="text-center text-2xl mt-8">{text2}</span>

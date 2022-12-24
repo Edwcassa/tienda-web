@@ -14,8 +14,8 @@ export default function MainRouter() {
 
    return (
       <>
-         {/* <br />
-         <br /> */}
+         <br />
+         <br />
          <Navbar />
          <Routes>
             <Route path='/' element={<Inicio />} />
