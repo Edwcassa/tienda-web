@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import Inicio from '../Pages/Inicio'
 
@@ -26,6 +27,8 @@ export default function MainRouter() {
             {/* <Route path='/mis_cursos/:courseId' element={<Curso_Detalle />} /> */}
             <Route path='*' element={<Error />} />
          </Routes>
+         <br />
+         <Footer />
       </>
    )
 }
