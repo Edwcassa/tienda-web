@@ -86,7 +86,7 @@ export default function Navbar() {
 
    return (
       <>
-         <div className='flex justify-between'>
+         <div className='flex justify-between mx-20'>
             <div>
                {
                   rutasA.map((item, index) => (
@@ -114,7 +114,7 @@ export default function Navbar() {
          <div className='flex justify-center relative'>
             {
                rutasB.map((item, index) => (
-                  <NavLink onMouseEnter={() => mostrar_menu(item.name)} to={item.ruta} key={index} className='mx-6 z-10 font-semibold hover:underline'>
+                  <NavLink onMouseEnter={() => mostrar_menu(item.name)} to={item.ruta} key={index} className='mx-6 z-20 font-semibold hover:underline'>
                      <span>
                         {item.name}
                      </span>
@@ -127,7 +127,7 @@ export default function Navbar() {
 
             {
                open &&
-               <div className=' border-b-4 border-slate-600 bg-white absolute min-w-[50%] mt-4 py-10'>
+               <div className=' border-b-4 border-slate-600 bg-white absolute min-w-[50%] mt-4 py-10 z-10'>
                   {
                      links.map((item: any, index: any) => (
                         <div className='flex justify-center' key={index}>
@@ -137,7 +137,7 @@ export default function Navbar() {
                                     <span className=' font-bold mb-3'>Nuevos Productos</span>
                                     {
                                        item.nuevosProductos.map((e: any, i: any) => (
-                                          <NavLink to={e.ruta} key={i}>
+                                          <NavLink className=' mb-1 hover:underline' to={e.ruta} key={i}>
                                              {e.name}
                                           </NavLink>
                                        ))
@@ -149,7 +149,7 @@ export default function Navbar() {
                               <span className=' font-bold mb-3'>Compra por producto</span>
                               {
                                  item.compraPorProducto?.map((e: any, i: any) => (
-                                    <NavLink to={e.ruta} key={i}>
+                                    <NavLink className=' mb-1 hover:underline' to={e.ruta} key={i}>
                                        {e.name}
                                     </NavLink>
                                  ))

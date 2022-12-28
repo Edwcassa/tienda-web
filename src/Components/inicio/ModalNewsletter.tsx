@@ -1,5 +1,4 @@
 import Modal from '../Modal'
-import close from '../../assets/close.svg'
 
 interface props {
    view: boolean,

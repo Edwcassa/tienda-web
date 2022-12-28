@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import ModalNewsletter from "../Components/inicio/ModalNewsletter";
 import ModalEnvios from "../Components/inicio/ModalEnvios";
 import Bubble from "../Components/Burbuja";
 import Banner from "../Components/Banner";
 import Banner02 from "../Components/Banner02";
-import Modal from "../Components/Modal";
 
 
 export default function Inicio() {
@@ -38,34 +36,34 @@ export default function Inicio() {
 
    return (
       <>
-         <div className='flex justify-center my-10'>
-            {/* <NavLink className='mx-10' to={'/envios'}>Envios gratis sobre S/190</NavLink> */}
+         {/* <div className='flex justify-center my-10'>
             <button onClick={() => setModal2(true)} className='mx-10'>Envios gratis sobre S/190</button>
             <NavLink className='mx-10' to={'/newsletter'}>Suscríbete a Fashion News</NavLink>
             <NavLink className='mx-10' to={'/devoluciones-de-compras-online'}>Devoluciones sin costo</NavLink>
-            {/* <button className='mr-8'>Suscríbete a Fashion News</button>
-            <button className='mr-8'>Devoluciones sin costo</button> */}
-         </div>
+         </div> */}
 
-         {
+         {/* {
             modal1 &&
             <ModalNewsletter
                view={modal1}
                setView={setModal1}
             />
-         }
+         } */}
 
-         {
+         {/* {
             modal2 &&
             <ModalEnvios
                view={modal2}
                setView={setModal2}
             />
-         }
+         } */}
 
          <br />
+         <br />
+         {/* <br /> */}
          <h3 className=" text-center text-2xl font-semibold">Las tendencias del momento</h3>
-         <br /><br />
+         <br />
+         <br />
 
          <div className="flex justify-center">
             {
@@ -81,8 +79,7 @@ export default function Inicio() {
 
          <br />
          <br />
-         <br />
-         <br />
+         <br />   
 
          <div className=" w-5/6 mx-auto grid grid-cols-2 bord gap-1">
             <Banner
@@ -125,7 +122,7 @@ export default function Inicio() {
 
          <br />
 
-         <div className=" w-5/6 mx-auto h-[800px] overflow-hidden bordeA flex items-center justify-center">
+         <div className=" w-5/6 mx-auto h-[800px] overflow-hidden flex items-center justify-center">
             <Banner02
                img="https://static.bershka.net/4/static/images/home/2022/slidesHTML/basics-botonera/assets/M_slide_man_basics_-1.jpg?t=20221214164500"
                text="Básicos"
