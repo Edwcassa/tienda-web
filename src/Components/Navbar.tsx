@@ -24,6 +24,7 @@ export default function Navbar() {
          nuevosProductos: [
             { "name": "⚡ Novedades", "ruta": "/hombre/novedades" },
             { "name": "🧢 Accesorios", "ruta": "/hombre/accesorios" },
+            { "name": "👞 Zapatos", "ruta": "/hombre/zapatos" },
          ],
          compraPorProducto: [
             { "name": "Ver todo", "ruta": "/hombre" },
@@ -43,8 +44,8 @@ export default function Navbar() {
    const rutasMujer = [
       {
          nuevosProductos: [
-            { "name": "⚡ Novedades", "ruta": "/hombre/novedades" },
-            { "name": "🧢 Accesorios", "ruta": "/hombre/accesorios" },
+            { "name": "⚡ Novedades", "ruta": "/mujer/novedades" },
+            { "name": "🧢 Accesorios", "ruta": "/mujer/accesorios" },
          ],
          compraPorProducto: [
             { "name": "Ver todo", "ruta": "/mujer" },
