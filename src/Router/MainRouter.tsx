@@ -2,11 +2,10 @@ import { Route, Routes } from 'react-router-dom'
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import Inicio from '../Pages/Inicio'
-
+import Mujer from '../Pages/mujer/Mujer'
 
 export default function MainRouter() {
 
-   const Mujer = () => <h1>mujer</h1>
    const M_Novedades = () => <h1>mujer novedades</h1>
    const M_Accesorios = () => <h1>mujer accesorios</h1>
    const M_Poleras = () => <h1>mujer poleras</h1>
