@@ -58,14 +58,14 @@ export default function Inicio() {
             />
          } */}
 
-         <br />
-         <br />
+         {/* <br /> */}
+         {/* <br /> */}
          {/* <br /> */}
          <h3 className=" text-center text-2xl font-semibold">Las tendencias del momento</h3>
-         <br />
-         <br />
+         {/* <br /> */}
+         {/* <br /> */}
 
-         <div className="flex justify-center">
+         {/* <div className="flex justify-center">
             {
                tendencias.map((e, i) => (
                   <Bubble key={i}
@@ -75,11 +75,11 @@ export default function Inicio() {
                   />
                ))
             }
-         </div>
+         </div> */}
 
-         <br />
-         <br />
-         <br />   
+         {/* <br /> */}
+         {/* <br /> */}
+         {/* <br />    */}
 
          <div className=" w-5/6 mx-auto grid grid-cols-2 bord gap-1">
             <Banner
