@@ -15,6 +15,9 @@ export default function Navbar() {
    var generoRutaActual = location.pathname.split('/')[1]
    const [nameButton, setNameButton] = useState(generoRutaActual)
 
+   // Existe un usuario
+   // const user = { 'name': 'user', 'role': 'regular' }
+   const user = null
 
    useEffect(() => {
       if (navMobile) document.body.classList.add('overflow-hidden');
@@ -25,7 +28,6 @@ export default function Navbar() {
       document.body.classList.remove('overflow-hidden')
    }
 
-   const user = { 'name': 'user', 'role': 'regular' }
 
 
 
@@ -55,18 +57,18 @@ export default function Navbar() {
 
    return (
       <>
-         <div>
-            <div className=' flex justify-between items-center font-HM px-16 py-4 shadow fixed w-full top-0 z-10 backdrop-blur-sm bg-white/80'>
+         <div className=' fixed w-full top-0 z-10 backdrop-blur-sm bg-white/80 shadow border sm:bordeA md:bordeB lg:bordeC'>
+            <div className=' flex justify-between items-center font-HM px-2 py-3 sm:px-10 sm:py-4 md:px-16 '>
                <div className=' flex items-center'>
                   <img
-                     className=' w-20 mr-10'
+                     className=' w-20 mr-3 md:mr-10 md:w-24'
                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Bershka_logo.svg/1280px-Bershka_logo.svg.png"
                   />
                   <div>
                      {
                         rutasA.map((e, i) => (
                            <NavLink to={e.ruta} key={i} onClick={() => setNameButton(e.name.toLowerCase())}
-                              className={` text-sm px-2 py-1 rounded mx-2 uppercase font-bold ${e.name.toLowerCase() == nameButton ? 'text-white bg-[#ff0058]' : ''}`}>
+                              className={` text-xs px-2 py-1 rounded sm:mx-2 sm:text-sm md:text-base uppercase font-bold ${e.name.toLowerCase() == nameButton ? 'text-white bg-[#ff0058]' : ''}`}>
                               <span>
                                  {e.name}
                               </span>
@@ -77,25 +79,31 @@ export default function Navbar() {
                </div>
 
                <div className=' flex'>
-                  <button className=' mr-4 flex my-auto items-center md:mr-8'>
-                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                        </svg>
-                     </div>
-                     <span className=' md:ml-2'>Entrar</span>
-                  </button>
 
-                  <NavLink to='/favoritos' className='mr-4 flex my-auto items-center md:mr-8'>
-                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                           <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-                        </svg>
-                     </div>
-                     <span className=' md:ml-2 hidden lg:block'>Favoritos</span>
-                  </NavLink>
+                  <div className='hidden sm:block'>
+                     <div className=' flex'>
+                        <button className=' px-2 py-1 rounded mr-4 flex my-auto items-center bg-gradient-to-b  '>
+                           <div>
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className=" w-6 h-6">
+                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                              </svg>
+                           </div>
+                           <span className=' md:ml-2 font-semibold'>Entrar</span>
+                        </button>
 
-                  <button className=' mr-4 flex my-auto items-center'>
+                        <NavLink to='/favoritos' className='mr-4 flex my-auto items-center md:mr-8'>
+                           <div>
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                 <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                              </svg>
+                           </div>
+                           <span className=' md:ml-2 hidden lg:block'>Favoritos</span>
+                        </NavLink>
+                     </div>
+                  </div>
+
+
+                  <button className=' mr-3 sm:mr-4 flex my-auto items-center'>
                      <div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
@@ -103,6 +111,8 @@ export default function Navbar() {
                      </div>
                      <span className=' md:ml-2 hidden lg:block'>Carrito de compras</span>
                   </button>
+
+
                   <button>
                      <div>
                         <svg xmlns="http://www.w3.org/2000/svg" data-e2e="" viewBox="0 0 48 48" fill="currentColor" className=' w-6 h-6'>
@@ -110,6 +120,7 @@ export default function Navbar() {
                         </svg>
                      </div>
                   </button>
+
                </div>
             </div>
 
@@ -181,7 +192,7 @@ export default function Navbar() {
             </div> */}
 
             {/* en version desktop */}
-            <div className=' hidden md:block mt-20'>
+            {/* <div className=' hidden md:block mt-20'>
                <div className='flex justify-center relative'>
                   {
                      rutasAyuda.map((item, index) => (
@@ -190,9 +201,6 @@ export default function Navbar() {
                               {item.name}
                            </span>
                         </NavLink>
-                        // <button onMouseEnter={() => mostrar_menu(item.name)} className='px-6 font-semibold hover:underline z-10'>
-                        //    {item.name}
-                        // </button>
                      ))
                   }
 
@@ -232,7 +240,7 @@ export default function Navbar() {
                      </div>
                   }
                </div>
-            </div>
+            </div> */}
          </div>
 
          {/* <div className='flex justify-center my-5'>
