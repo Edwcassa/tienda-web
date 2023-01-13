@@ -29,6 +29,12 @@ body {
   box-sizing: border-box;
 }
 
+@layer utilities {
+   .clip {
+      clip-path: polygon(1% 37%, 88% 36%, 88% 0, 100% 0, 100% 100%, 0 100%);
+   }
+}
+
 @layer components {
    .bordeA {
      @apply border-solid border-2 border-green-500;
@@ -44,5 +50,8 @@ body {
    }
    .fcenter {
       @apply flex justify-center items-center
+   }
+   .triangulo {
+      @apply border-t-[8px] border-t-gray-500 border-r-[4px] border-r-transparent border-l-[4px] border-l-transparent
    }
 }
