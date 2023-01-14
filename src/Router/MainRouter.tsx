@@ -31,11 +31,7 @@ export default function MainRouter() {
    const Sale_Mujer = () => <h1>sale mujer</h1>
    const Sale_Hombre = () => <h1>sale hombre</h1>
    
-   
-   const Servicio_Cliente = () => <h1>servicio al cliente</h1>
-   const Devoluciones = () => <h1>devoluciones de compras online</h1>
-   const Tiendas = () => <h1>tiendas</h1>
-   const Favoritos = () => <h1>favoritos</h1>
+   const Ayuda = () => <h1>Ayuda</h1>
 
    const Error = () => <h1>error</h1>
 
@@ -73,10 +69,7 @@ export default function MainRouter() {
             <Route path='/sale/hombre' element={<Sale_Hombre />} />
 
 
-            <Route path='/servicio-al-cliente' element={<Servicio_Cliente />} />
-            <Route path='/devoluciones-de-compras-online' element={<Devoluciones />} />
-            <Route path='/tiendas' element={<Tiendas />} />
-            <Route path='/favoritos' element={<Favoritos />} />
+            <Route path='/ayuda' element={<Ayuda />} />
             {/* <Route path='/mis_cursos/:courseId' element={<Curso_Detalle />} /> */}
             <Route path='*' element={<Error />} />
          </Routes>
