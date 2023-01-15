@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'HM': ['Mulish', 'sans-serif'],
+        'Modern': ['Mulish', 'sans-serif'],
+        'Design': ['HMregular', 'sans-serif'],
       },
     },
   },

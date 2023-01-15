@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { rutasA, rutasHombre, rutasMujer, rutasSale, rutasAyuda } from '../json/rutas.js'
 
 
 export default function Navbar() {
 
-   const [links, setLinks] = useState<any>([])
+   const navigate = useNavigate();
 
    // Para verificar en que boton genero nos encontramos
    const location = useLocation();
@@ -18,27 +18,13 @@ export default function Navbar() {
    // mostrar menu mas
    const [showMenu, setShowMenu] = useState(false)
 
-
-   const mostrar_links = (link_name: string) => {
-      if (link_name === 'Hombre') {
-         setLinks(rutasHombre)
-         return;
-      } if (link_name === 'Mujer') {
-         setLinks(rutasMujer)
-         return;
-      } if (link_name === 'Sale') {
-         setLinks(rutasSale)
-         return;
-      }
-   }
-
    return (
       <>
          <div className=' fixed w-full top-0 z-10 backdrop-blur-sm bg-white/90 shadow '>
-            <div className=' flex justify-between items-center font-HM px-2 py-3 sm:px-4 md:px-10 lg:px-16 '>
+            <div className=' flex justify-between items-center font-Modern px-2 py-3 sm:px-4 md:px-10 lg:px-16 '>
                <div className=' flex items-center'>
-                  <img
-                     className=' w-16 mr-3 md:mr-5 lg:mr-10 sm:w-20'
+                  <img onClick={() => navigate('/')}
+                     className=' w-16 mr-3 md:mr-5 lg:mr-10 sm:w-20 cursor-pointer'
                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Bershka_logo.svg/1280px-Bershka_logo.svg.png"
                   />
                   <div>

@@ -1,19 +1,24 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
 interface props {
    img: string,
    text: string,
-   subtext: string,
-   link: string
+   subtext?: string,
+   link: string,
+   colorText: string,
+   imageOpacity?: string
 }
-export default function Banner({ img, text, subtext, link }: props) {
+export default function Banner({ img, text, subtext, link, colorText, imageOpacity }: props) {
+
+   const navigate = useNavigate();
+
    return (
       <>
-         <div className=" relative border-0 border-blue-600 flex justify-center h-[680px] mx-auto">
-            <img className=" w-full object-cover" src={img} alt="" />
-            <div className="absolute bottom-0 flex flex-col text-white">
-               <span className=" text-center text-4xl font-semibold ">{text}</span>
-               <span className="text-center text-lg my-5 font-semibold">{subtext}</span>
+         <div onClick={() => navigate(link)} className=" flex justify-center cursor-pointer w-full sm:h-[500px] md:h-[700px] lg:h-[900px] relative">
+            <img className={` w-full h-full object-cover ${imageOpacity}`} src={img} alt="" />
+            <div style={{'color' : colorText}} className={`absolute bottom-1/3 flex flex-col font-Modern`}>
+               <span className=" uppercase text-center text-sm my-5 font-extrabold">{subtext}</span>
+               <span className=" uppercase text-center text-4xl sm:text-5xl md:text-6xl font-extrabold">{text}</span>
             </div>
          </div>
 
