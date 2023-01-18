@@ -14,7 +14,7 @@ export default function Banner({ img, text, subtext, link, colorText, imageOpaci
 
    return (
       <>
-         <div onClick={() => navigate(link)} className=" flex justify-center cursor-pointer w-full sm:h-[500px] md:h-[700px] lg:h-[900px] relative">
+         <div onClick={() => navigate(link)} className=" flex justify-center cursor-pointer w-full sm:h-[350px] md:h-[450px] lg:h-[600px] relative">
             <img className={` w-full h-full object-cover ${imageOpacity}`} src={img} alt="" />
             <div style={{'color' : colorText}} className={`absolute bottom-1/3 flex flex-col font-Modern`}>
                <span className=" uppercase text-center text-sm my-5 font-extrabold">{subtext}</span>

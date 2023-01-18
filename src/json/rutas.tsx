@@ -6,7 +6,7 @@ export const rutasAyuda = [
 
 export const rutasA = [
    { "name": "Hombre", "ruta": "/hombre" },
-   { "name": "Mujer", "ruta": "/mujer" },
+   // { "name": "Mujer", "ruta": "/mujer" },
    { "name": "Sale", "ruta": "/sale" },
 ]
 
@@ -32,21 +32,21 @@ export const rutasHombre = [
    }
 ]
 
-export const rutasMujer = [
-   {
-      nuevosProductos: [
-         { "name": "⚡ Novedades", "ruta": "/mujer/novedades" },
-         { "name": "🧢 Accesorios", "ruta": "/mujer/accesorios" },
-      ],
-      compraPorProducto: [
-         { "name": "Ver todo", "ruta": "/mujer" },
-         { "name": "Poleras", "ruta": "/mujer/poleras" },
-         { "name": "Blazers", "ruta": "/mujer/blazers" },
-         { "name": "Polos y tops", "ruta": "/mujer/polos-y-tops" },
-         { "name": "Basicos", "ruta": "/mujer/basicos" },
-      ]
-   }
-]
+// export const rutasMujer = [
+//    {
+//       nuevosProductos: [
+//          { "name": "⚡ Novedades", "ruta": "/mujer/novedades" },
+//          { "name": "🧢 Accesorios", "ruta": "/mujer/accesorios" },
+//       ],
+//       compraPorProducto: [
+//          { "name": "Ver todo", "ruta": "/mujer" },
+//          { "name": "Poleras", "ruta": "/mujer/poleras" },
+//          { "name": "Blazers", "ruta": "/mujer/blazers" },
+//          { "name": "Polos y tops", "ruta": "/mujer/polos-y-tops" },
+//          { "name": "Basicos", "ruta": "/mujer/basicos" },
+//       ]
+//    }
+// ]
 
 export const rutasSale = [
    {

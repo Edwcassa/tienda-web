@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { rutasA, rutasHombre, rutasMujer, rutasSale, rutasAyuda } from '../json/rutas.js'
+import { rutasA, rutasHombre, rutasSale, rutasAyuda } from '../json/rutas.js'
 
 
 export default function Navbar() {

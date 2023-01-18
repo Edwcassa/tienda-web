@@ -2,18 +2,17 @@ import { Route, Routes } from 'react-router-dom'
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import Inicio from '../Pages/Inicio'
-import Mujer from '../Pages/mujer/Mujer'
+import Hombre from '../Pages/hombre/Hombre'
 
 export default function MainRouter() {
 
-   const M_Novedades = () => <h1>mujer novedades</h1>
-   const M_Accesorios = () => <h1>mujer accesorios</h1>
-   const M_Poleras = () => <h1>mujer poleras</h1>
-   const M_Blazers = () => <h1>mujer blazers</h1>
-   const M_Polos_Tops = () => <h1>mujer polos y tops</h1>
-   const M_Basicos = () => <h1>mujer basicos</h1>
+   // const M_Novedades = () => <h1>mujer novedades</h1>
+   // const M_Accesorios = () => <h1>mujer accesorios</h1>
+   // const M_Poleras = () => <h1>mujer poleras</h1>
+   // const M_Blazers = () => <h1>mujer blazers</h1>
+   // const M_Polos_Tops = () => <h1>mujer polos y tops</h1>
+   // const M_Basicos = () => <h1>mujer basicos</h1>
 
-   const Hombre = () => <h1>hombre</h1>
    const H_Novedades = () => <h1>hombre novedades</h1>
    const H_Accesorios = () => <h1>hombre accesorios</h1>
    const H_Zapatos = () => <h1>hombre zapatos</h1>
@@ -41,13 +40,13 @@ export default function MainRouter() {
          <br /> <br /> <br /> <br />
          <Routes>
             <Route path='/' element={<Inicio />} />
-            <Route path='/mujer' element={<Mujer />} />
+            {/* <Route path='/mujer' element={<Mujer />} />
             <Route path='/mujer/novedades' element={<M_Novedades />} />
             <Route path='/mujer/accesorios' element={<M_Accesorios />} />
             <Route path='/mujer/poleras' element={<M_Poleras />} />
             <Route path='/mujer/blazers' element={<M_Blazers />} />
             <Route path='/mujer/polos-y-tops' element={<M_Polos_Tops />} />
-            <Route path='/mujer/basicos' element={<M_Basicos />} />
+            <Route path='/mujer/basicos' element={<M_Basicos />} /> */}
 
             <Route path='/hombre' element={<Hombre />} />
             <Route path='/hombre/novedades' element={<H_Novedades />} />
