@@ -6,6 +6,10 @@
    font-family: "HMRegular";
    src: url("./assets/Merrant-Regular.ttf");
  }
+@font-face {
+   font-family: "CodeSaver";
+   src: url("./assets/CodeSaver-Regular.otf");
+ }
 
 :root {
   /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif;

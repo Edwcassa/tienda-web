@@ -9,7 +9,7 @@ import Banner02 from "../Components/Banner02";
 export default function Inicio() {
 
    return (
-      <>         
+      <>
          <h3 className=" font-Design text-center text-2xl font-semibold">Las tendencias del momento</h3>
          <br />
 
@@ -39,18 +39,24 @@ export default function Inicio() {
 
          <br />
 
+         {/* <div className=" w-5/6 mx-auto h-[800px] overflow-hidden flex items-center justify-center"> */}
 
-         {/* <div className=" w-5/6 mx-auto h-[800px] overflow-hidden flex items-center justify-center">
+         {/* </div> */}
+
+         <div>
             <Banner02
-               img="https://static.bershka.net/4/static/images/home/2022/slidesHTML/basics-botonera/assets/M_slide_man_basics_-1.jpg?t=20221214164500"
-               text="Básicos"
-               text2="Polos"
-               text3="Poleras"
-               text4="Jeans"
-               text5="Pantalones"
-               link="/"
+               img="https://i.postimg.cc/qRRY6jq7/D-slide-man-basics2-1.jpg"
+               links={[
+                  { "text": "Basicos", "link": "/hombre/basicos" },
+                  { "text": "Pantalones", "link": "/hombre/pantalones" },
+                  { "text": "Polos", "link": "/hombre/polos" },
+                  { "text": "Poleras", "link": "/hombre/poleras" },
+                  { "text": "Camisas", "link": "/hombre/camisas" },
+               ]}
+               verTodo="/hombre"
+               positionLinks=" justify-end"
             />
-         </div> */}
+         </div>
 
 
       </>

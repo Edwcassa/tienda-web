@@ -9,6 +9,7 @@ module.exports = {
       fontFamily: {
         'Modern': ['Mulish', 'sans-serif'],
         'Design': ['HMregular', 'sans-serif'],
+        'Design02': ['CodeSaver', 'sans-serif'],
       },
     },
   },
