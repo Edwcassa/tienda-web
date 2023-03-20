@@ -1,8 +1,9 @@
+import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Footer from '../Components/Footer'
-import Navbar from '../Components/Navbar'
-import Inicio from '../Pages/Inicio'
-import Hombre from '../Pages/hombre/Hombre'
+import Footer from '../ui/components/shared/Footer'
+import Navbar from '../ui/components/shared/Navbar'
+import HomePage from '../ui/pages/HomePage'
+import ManPage from '../ui/pages/ManPage'
 
 export default function MainRouter() {
 
@@ -39,7 +40,7 @@ export default function MainRouter() {
          <Navbar />
          <br /> <br /> <br /> <br />
          <Routes>
-            <Route path='/' element={<Inicio />} />
+            <Route path='/' element={<HomePage />} />
             {/* <Route path='/mujer' element={<Mujer />} />
             <Route path='/mujer/novedades' element={<M_Novedades />} />
             <Route path='/mujer/accesorios' element={<M_Accesorios />} />
@@ -48,7 +49,7 @@ export default function MainRouter() {
             <Route path='/mujer/polos-y-tops' element={<M_Polos_Tops />} />
             <Route path='/mujer/basicos' element={<M_Basicos />} /> */}
 
-            <Route path='/hombre' element={<Hombre />} />
+            <Route path='/hombre' element={<ManPage />} />
             <Route path='/hombre/novedades' element={<H_Novedades />} />
             <Route path='/hombre/accesorios' element={<H_Accesorios />} />
             <Route path='/hombre/zapatos' element={<H_Zapatos />} />

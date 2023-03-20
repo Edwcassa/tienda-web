@@ -1,12 +1,9 @@
-import { useState } from "react";
-import ModalNewsletter from "../Components/inicio/ModalNewsletter";
-import ModalEnvios from "../Components/inicio/ModalEnvios";
-import Bubble from "../Components/Burbuja";
-import Banner from "../Components/Banner";
-import Banner02 from "../Components/Banner02";
+import React from 'react'
+import Banner from "../components/banner/Banner";
+import Banner02 from "../components/banner/Banner02";
 
 
-export default function Inicio() {
+export default function HomePage() {
 
    return (
       <>
@@ -26,8 +23,8 @@ export default function Inicio() {
                
             />
             <Banner
-               // img="https://static.bershka.net/4/photos2/2023/V/0/1/p/3478/851/800/3fb01b0f6671ef5eefd1c85a96812264-3478851800_2_7_0.jpg?cropfixwidth=2052&imwidth=750&impolicy=bershka-crop-fix-width-itxmediumhigh&imformat=chrome"
-               // img="https://i.pinimg.com/originals/17/42/73/17427385489dae999ad078cce6279e15.jpg"
+              //  img="https://static.bershka.net/4/photos2/2023/V/0/1/p/3478/851/800/3fb01b0f6671ef5eefd1c85a96812264-3478851800_2_7_0.jpg?cropfixwidth=2052&imwidth=750&impolicy=bershka-crop-fix-width-itxmediumhigh&imformat=chrome"
+              //  img="https://i.pinimg.com/originals/17/42/73/17427385489dae999ad078cce6279e15.jpg"
                img="https://static.bershka.net/4/photos2/2023/V/0/2/p/3349/019/811/3349019811_1_1_4.jpg?t=1675933402576"
                text="Mujer"
                subtext="Ir a moda de"
@@ -46,10 +43,6 @@ export default function Inicio() {
          </div>
 
          <br />
-
-         {/* <div className=" w-5/6 mx-auto h-[800px] overflow-hidden flex items-center justify-center"> */}
-
-         {/* </div> */}
 
          <div>
             <Banner02

@@ -1,17 +1,32 @@
-import Card from "../../Components/Card"
+import React from "react"
+import { useEffect, useState } from "react"
+import * as ProductsUsecase from '../../modules/products/usecase/products.usecase'
+import { Product } from "../../api/interfaces/product/product.interface"
 
-export default function Hombre() {
-   return (
-      <>
-         <div className=" ml-2 sm:ml-5 md:ml-10 ">
-            <p className=" text-xl font-semibold mb-3">Hombre</p>
-            <span className=" text-sm font-semibold text-white bg-[#ff0058] p-1 rounded">REBAJAS HASTA 60%</span>
-         </div>
+export default function ManPage() {
+  return (
+    <>
+      <div className=" ml-2 sm:ml-5 md:ml-10 ">
+        <p className=" text-xl font-semibold mb-3">Hombre</p>
+        <span className=" text-sm font-semibold text-white bg-[#ff0058] p-1 rounded">REBAJAS HASTA 60%</span>
+      </div>
 
-         <br />
+      <br />
 
-         <div className=" grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 w-full md:px-1">
-            <Card
+      <div className=" grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 w-full md:px-1">
+        <h1>Hola</h1>
+      </div>
+    </>
+  )
+}
+
+
+
+
+
+
+
+{/* <Card
                img="https://static.bershka.net/4/photos2/2022/I/0/1/p/3805/551/427/3805551427_1_1_4.jpg?t=1654594220964"
                sub_img="https://static.bershka.net/4/photos2/2023/V/0/1/p/6712/644/800//02/6712644800_2_1_3.jpg?t=1671720904645"
                description="Skinny High Jeans"
@@ -65,8 +80,4 @@ export default function Hombre() {
                   { 'name': 'azul', 'code': '#091c47' },
                   { 'name': 'uva', 'code': '#7f4599' }
                ]}
-            />
-         </div>
-      </>
-   )
-}
+            /> */}

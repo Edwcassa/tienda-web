@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link } from "react-router-dom"
 
 interface props {
@@ -15,7 +16,7 @@ export default function Banner02({ img, links, verTodo, positionLinks }: props) 
                <div className=" flex flex-col my-auto px-10 sm:px-20 md:px-28 lg:px-44 ">
                   {
                      links.map((e, i) => (
-                        <Link className=" text-center text-md sm:text-[3vw] lg:text-4xl sm:mb-2 md:mb-3 lg:mb-7 hover:underline" to={e.link}>
+                        <Link key={i} className=" text-center text-md sm:text-[3vw] lg:text-4xl sm:mb-2 md:mb-3 lg:mb-7 hover:underline" to={e.link}>
                            {e.text}
                         </Link>
                      ))

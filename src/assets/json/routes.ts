@@ -6,8 +6,8 @@ export const rutasAyuda = [
 
 export const rutasA = [
    { "name": "Hombre", "ruta": "/hombre" },
-   // { "name": "Mujer", "ruta": "/mujer" },
    { "name": "Sale", "ruta": "/sale" },
+   //  { "name": "Mujer", "ruta": "/mujer" },
 ]
 
 export const rutasHombre = [

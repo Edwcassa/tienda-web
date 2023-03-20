@@ -1,7 +1,8 @@
 // import reactLogo from './assets/react.svg'
+import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import './App.css'
-import AppRouter from './Router/AppRouter'
+import AppRouter from './app/routes/AppRouter'
 
 function App() {
 
