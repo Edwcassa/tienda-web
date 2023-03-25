@@ -1,4 +1,4 @@
-import { Color } from "./color.interface"
+import { Color } from './color.interface'
 
 export interface Product {
   code: string

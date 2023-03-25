@@ -1,28 +1,54 @@
-import React from 'react'
-// import { useHttpRequest } from '../../hooks/useHttpRequest'
-// import { Product } from '../../api/interfaces/product/product.interface'
-
-// interface ExampleData {
-//   // Define la estructura de los datos recibidos
-// }
+import React, { useEffect, useState } from 'react'
+import { ProductsResponseBody } from '../../api/interfaces/product/product-reponse-body'
+import { Product } from '../../api/interfaces/product/product.interface'
+import ProductUsecase from '../../modules/productUsecase'
 
 export default function ManPage () {
-  // const { data, isLoading, error, reFetch } = useHttpRequest<Product>('api/productos')
+  const [products, setProducts] = useState<ProductsResponseBody | any>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
-  return (
-    <>
-      <div className=' ml-2 sm:ml-5 md:ml-10 '>
-        <p className=' text-xl font-semibold mb-3'>Hombre</p>
-        <span className=' text-sm font-semibold text-white bg-[#ff0058] p-1 rounded'>REBAJAS HASTA 60%</span>
-      </div>
+  const getProducts = async (params: string) => {
+    try {
+      setLoading(true)
+      const response = await ProductUsecase.getProducts(params)
+      setProducts(response)
+    } catch (error: any) {
+      setError(error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
-      <br />
+  useEffect(() => {
+    getProducts('')
+  }, [])
 
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>Error</p>
+  }
+
+  if (products) {
+    return (
       <div className=' grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 w-full md:px-1'>
-        <h1>Hola</h1>
+        {products[0].data?.map((product: Product, index: any) => (
+          <div key={index} className=' flex flex-col items-center justify-center '>
+            <div className=' flex flex-col items-center justify-center '>
+              <img src={product.image} alt={product.title} className=' w-48 h-48 object-cover ' />
+              <div className=' flex flex-col items-center justify-center '>
+                <p className=' text-sm font-semibold text-center '>{product.title}</p>
+                <p className=' text-sm font-semibold text-center '>{product.price}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </>
-  )
+    )
+  }
 }
 
 /* <Card
