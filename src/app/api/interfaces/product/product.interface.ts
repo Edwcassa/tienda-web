@@ -1,6 +1,7 @@
 import { Color } from './color.interface'
 
 export interface Product {
+  _id: string
   code: string
   type: string
   title: string

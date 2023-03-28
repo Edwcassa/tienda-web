@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { ProductsResponseBody } from '../../api/interfaces/product/product-reponse-body'
+import { ProductsResponseBody } from '../../api/interfaces/product/products-reponse-body'
 import { Product } from '../../api/interfaces/product/product.interface'
 import ProductUsecase from '../../modules/productUsecase'
+import { useNavigate } from 'react-router-dom'
 
-export default function ManPage () {
+export default function ManPage (): JSX.Element {
   const [products, setProducts] = useState<ProductsResponseBody | any>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -24,6 +25,12 @@ export default function ManPage () {
     getProducts('')
   }, [])
 
+  const navigate = useNavigate()
+  const navigateDetalle = (path: string) => {
+    navigate(path)
+  }
+  console.log('manPage')
+
   if (loading) {
     return <p>Loading...</p>
   }
@@ -35,8 +42,8 @@ export default function ManPage () {
   if (products) {
     return (
       <div className=' grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 w-full md:px-1'>
-        {products[0].data?.map((product: Product, index: any) => (
-          <div key={index} className=' flex flex-col items-center justify-center '>
+        {products.data?.map((product: Product, index: number) => (
+          <div key={index} className=' flex flex-col items-center justify-center ' onClick={() => navigateDetalle(product._id)}>
             <div className=' flex flex-col items-center justify-center '>
               <img src={product.image} alt={product.title} className=' w-48 h-48 object-cover ' />
               <div className=' flex flex-col items-center justify-center '>
@@ -49,6 +56,9 @@ export default function ManPage () {
       </div>
     )
   }
+
+  // return <p>Not found</p>
+  return <span> </span>
 }
 
 /* <Card

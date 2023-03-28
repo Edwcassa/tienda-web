@@ -52,8 +52,8 @@ body {
    .bordeD {
      @apply border-solid border-2 border-blue-600;
    }
-   .boton {
-      @apply bg-black text-white px-3 py-3 font-semibold active:text-gray-400
+   .button {
+      @apply bg-[#00ca8d] text-white px-3 py-3 font-semibold active:text-gray-300
    }
    .fcenter {
       @apply flex justify-center items-center
