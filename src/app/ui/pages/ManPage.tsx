@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import { ProductsResponseBody } from '../../api/interfaces/product/products-reponse-body'
 import { Product } from '../../api/interfaces/product/product.interface'
 import ProductUsecase from '../../modules/productUsecase'
 import { useNavigate } from 'react-router-dom'
 
-export default function ManPage (): JSX.Element {
+interface ProductDetailsPageProps {
+  addToCart: () => void
+}
+
+export default function ManPage ({ addToCart }: ProductDetailsPageProps): ReactElement {
   const [products, setProducts] = useState<ProductsResponseBody | any>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -29,7 +33,6 @@ export default function ManPage (): JSX.Element {
   const navigateDetalle = (path: string) => {
     navigate(path)
   }
-  console.log('manPage')
 
   if (loading) {
     return <p>Loading...</p>

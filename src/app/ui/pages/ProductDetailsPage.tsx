@@ -3,7 +3,11 @@ import ProductUsecase from '../../modules/productUsecase'
 import { useParams } from 'react-router-dom'
 import { Product } from '../../api/interfaces/product/product.interface'
 
-export default function ProductDetailsPage (): JSX.Element {
+interface ProductDetailsPageProps {
+  addToCart: () => void
+}
+
+export default function ProductDetailsPage ({ addToCart }: ProductDetailsPageProps): JSX.Element {
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -11,6 +15,14 @@ export default function ProductDetailsPage (): JSX.Element {
   const [sizeSelected, setSizeSelected] = useState('')
 
   const [heartActive, setHeartActive] = useState(false)
+
+  const [localCartShopping, setLocalCartShopping] = useState<Product[]>(() => {
+    const cartShopping = window.localStorage.getItem('cart_shopping')
+    if (cartShopping) {
+      return JSON.parse(cartShopping)
+    }
+    return []
+  })
 
   const { idProduct } = useParams()
 
@@ -31,6 +43,35 @@ export default function ProductDetailsPage (): JSX.Element {
       getProduct(idProduct)
     }
   }, [])
+
+  const handleAddToCart = () => {
+    addLocalCart()
+  }
+
+  const addLocalCart = () => {
+    if (product) {
+      if (window.localStorage.getItem('cart_shopping') === null) {
+        window.localStorage.setItem('cart_shopping', '[]')
+        setLocalCartShopping(prev => [])
+      }
+
+      setLocalCartShopping(prevCartShopping => {
+        const exist = prevCartShopping.find((e: Product) => e.code === product.code)
+        if (!exist) {
+          const updatedCart = prevCartShopping.concat(product)
+          window.localStorage.setItem('cart_shopping', JSON.stringify(updatedCart))
+          return updatedCart
+        } else {
+          return prevCartShopping
+        }
+      })
+
+      const exist = localCartShopping.find((e: Product) => e.code === product.code)
+      if (!exist) {
+        addToCart()
+      }
+    }
+  }
 
   if (loading) {
     return <p>Loading...</p>
@@ -86,7 +127,7 @@ export default function ProductDetailsPage (): JSX.Element {
                     <span
                       className={`w-12 h-12 grid place-content-center rounded-full border-[1px] cursor-pointer
                                   border-gray-400 hover:border-gray-600
-                                    ${e === sizeSelected && 'bg-slate-900 text-white'}`}
+                                    ${e === sizeSelected && 'bg-gray-100 text-black'}`}
                     >
                       {e}
                     </span>
@@ -96,16 +137,13 @@ export default function ProductDetailsPage (): JSX.Element {
             }
           </div>
 
+          <small className=' font-normal mr-2'>Guia de tallas</small>
+          <small>{product.description}</small>
+
           <div className='flex items-center'>
-            <button className='button w-56'>
+            <button className='button w-56' onClick={() => handleAddToCart()}>
               Añadir a la cesta
             </button>
-
-            {/* <button>
-              <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' className='w-6 h-6'>
-                <path stroke-linecap='round' stroke-linejoin='round' d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z' />
-              </svg>
-            </button> */}
             <div className='heart-btn'>
               <div
                 className={`content ${heartActive ? 'heart-active' : ''}`}
