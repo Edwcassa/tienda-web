@@ -10,10 +10,15 @@ import ProductDetailsPage from '../ui/pages/ProductDetailsPage'
 /* eslint-disable react/jsx-pascal-case */
 
 export default function MainRouter () {
-  const [cartNumberProducts, setCartNumberProducts] = useState(0)
+  const [countCartProducts, setCountCartProducts] = useState(0)
+  const [countFavorites, setCountFavorites] = useState(0)
 
   const addToCart = () => {
-    setCartNumberProducts(cartNumberProducts + 1)
+    setCountCartProducts(countCartProducts + 1)
+  }
+
+  const addToFavorites = () => {
+    setCountFavorites(countFavorites + 1)
   }
 
   const Sale = () => <h1>sale</h1>
@@ -26,14 +31,14 @@ export default function MainRouter () {
 
   return (
     <>
-      <Navbar cartNumberProducts={cartNumberProducts} />
+      <Navbar countCartProducts={countCartProducts} countFavorites={countFavorites} />
       <br /> <br /> <br />
 
       <Routes>
         <Route path='/' element={<HomePage />} />
 
-        <Route path='/hombre' element={<ManPage addToCart={addToCart} />} />
-        <Route path='/hombre/:idProduct' element={<ProductDetailsPage addToCart={addToCart} />} />
+        <Route path='/hombre' element={<ManPage addToCart={addToCart} addToFavorites={addToFavorites} />} />
+        <Route path='/hombre/:idProduct' element={<ProductDetailsPage addToCart={addToCart} addToFavorites={addToFavorites} />} />
 
         <Route path='/sale' element={<Sale />} />
         <Route path='/sale/hombre' element={<Sale_Hombre />} />

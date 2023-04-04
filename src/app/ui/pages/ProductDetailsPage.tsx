@@ -5,17 +5,17 @@ import { Product } from '../../api/interfaces/product/product.interface'
 
 interface ProductDetailsPageProps {
   addToCart: () => void
+  addToFavorites: () => void
 }
 
-export default function ProductDetailsPage ({ addToCart }: ProductDetailsPageProps): JSX.Element {
+export default function ProductDetailsPage ({ addToCart, addToFavorites }: ProductDetailsPageProps): JSX.Element {
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
   const [sizeSelected, setSizeSelected] = useState('')
 
-  const [heartActive, setHeartActive] = useState(false)
-
+  // Local Storage for cart and favorites
   const [localCartShopping, setLocalCartShopping] = useState<Product[]>(() => {
     const cartShopping = window.localStorage.getItem('cart_shopping')
     if (cartShopping) {
@@ -23,6 +23,15 @@ export default function ProductDetailsPage ({ addToCart }: ProductDetailsPagePro
     }
     return []
   })
+
+  const [localFavorites, setLocalFavorites] = useState<Product[]>(() => {
+    const Favorites = window.localStorage.getItem('favorites')
+    if (Favorites) {
+      return JSON.parse(Favorites)
+    }
+    return []
+  })
+  // End local Storage for cart and favorites
 
   const { idProduct } = useParams()
 
@@ -43,6 +52,10 @@ export default function ProductDetailsPage ({ addToCart }: ProductDetailsPagePro
       getProduct(idProduct)
     }
   }, [])
+
+  const handleAddToFavorites = () => {
+    addLocalFavorites()
+  }
 
   const handleAddToCart = () => {
     addLocalCart()
@@ -69,6 +82,31 @@ export default function ProductDetailsPage ({ addToCart }: ProductDetailsPagePro
       const exist = localCartShopping.find((e: Product) => e.code === product.code)
       if (!exist) {
         addToCart()
+      }
+    }
+  }
+
+  const addLocalFavorites = () => {
+    if (product) {
+      if (window.localStorage.getItem('favorites') === null) {
+        window.localStorage.setItem('favorites', '[]')
+        setLocalCartShopping(prev => [])
+      }
+
+      setLocalFavorites(prevFavorites => {
+        const exist = prevFavorites.find((e: Product) => e.code === product.code)
+        if (!exist) {
+          const updatedCart = prevFavorites.concat(product)
+          window.localStorage.setItem('favorites', JSON.stringify(updatedCart))
+          return updatedCart
+        } else {
+          return prevFavorites
+        }
+      })
+
+      const exist = localFavorites.find((e: Product) => e.code === product.code)
+      if (!exist) {
+        addToFavorites()
       }
     }
   }
@@ -141,17 +179,12 @@ export default function ProductDetailsPage ({ addToCart }: ProductDetailsPagePro
           <small>{product.description}</small>
 
           <div className='flex items-center'>
-            <button className='button w-56' onClick={() => handleAddToCart()}>
+            <button onClick={() => handleAddToCart()} className='button w-56'>
               Añadir a la cesta
             </button>
-            <div className='heart-btn'>
-              <div
-                className={`content ${heartActive ? 'heart-active' : ''}`}
-                onClick={() => setHeartActive(!heartActive)}
-              >
-                <span className={`heart ${heartActive ? 'heart-active' : ''}`} />
-              </div>
-            </div>
+            <button onClick={() => handleAddToFavorites()} className=' bg-gray-400'>
+              Add to fav
+            </button>
 
           </div>
 

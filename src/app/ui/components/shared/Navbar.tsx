@@ -4,10 +4,11 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { rutasA } from '../../../../assets/json/routes'
 
 interface NavbarProps {
-  cartNumberProducts: number
+  countCartProducts: number
+  countFavorites: number
 }
 
-export default function Navbar ({ cartNumberProducts }: NavbarProps) {
+export default function Navbar ({ countCartProducts, countFavorites }: NavbarProps) {
   const navigate = useNavigate()
 
   // Para verificar en que boton genero nos encontramos
@@ -51,15 +52,17 @@ export default function Navbar ({ cartNumberProducts }: NavbarProps) {
           <div className=' flex items-center'>
             <div className='hidden relative sm:block'>
               <div className=' flex'>
-                {!user &&
-                  <button className=' px-1 md:px-2 py-1 rounded mr-1 md:mr-2 flex my-auto items-center hover:bg-gray-100 '>
-                    <div>
-                      <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className=' w-6 h-6'>
-                        <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' />
-                      </svg>
-                    </div>
-                    <span className=' md:ml-2'>Entrar</span>
-                  </button>}
+                {
+                  !user &&
+                    <button className=' px-1 md:px-2 py-1 rounded mr-1 md:mr-2 flex my-auto items-center hover:bg-gray-100 '>
+                      <div>
+                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className=' w-6 h-6'>
+                          <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' />
+                        </svg>
+                      </div>
+                      <span className=' md:ml-2'>Entrar</span>
+                    </button>
+                }
 
                 <NavLink to='/favoritos' className=' px-1 md:px-2 py-1 rounded mr-1 md:mr-2 flex my-auto items-center hover:underline'>
                   <div>
@@ -67,6 +70,7 @@ export default function Navbar ({ cartNumberProducts }: NavbarProps) {
                       <path strokeLinecap='round' strokeLinejoin='round' d='M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z' />
                     </svg>
                   </div>
+                  <span>{countFavorites}</span>
                   <span className=' md:ml-2 hidden lg:block'>Favoritos</span>
                 </NavLink>
               </div>
@@ -78,7 +82,7 @@ export default function Navbar ({ cartNumberProducts }: NavbarProps) {
                   <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z' />
                 </svg>
               </div>
-              <span>({cartNumberProducts})</span>
+              <span>({countCartProducts})</span>
               <span className=' hidden sm:block text-sm ml-1 sm:text-base md:ml-2'>Bolsa</span>
             </button>
 
