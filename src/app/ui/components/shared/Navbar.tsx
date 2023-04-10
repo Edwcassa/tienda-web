@@ -5,10 +5,10 @@ import { rutasA } from '../../../../assets/json/routes'
 
 interface NavbarProps {
   countCartProducts: number
-  countFavorites: number
+  openSidebar: () => void
 }
 
-export default function Navbar ({ countCartProducts, countFavorites }: NavbarProps) {
+export default function Navbar ({ countCartProducts, openSidebar }: NavbarProps) {
   const navigate = useNavigate()
 
   // Para verificar en que boton genero nos encontramos
@@ -70,13 +70,12 @@ export default function Navbar ({ countCartProducts, countFavorites }: NavbarPro
                       <path strokeLinecap='round' strokeLinejoin='round' d='M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z' />
                     </svg>
                   </div>
-                  <span>{countFavorites}</span>
                   <span className=' md:ml-2 hidden lg:block'>Favoritos</span>
                 </NavLink>
               </div>
             </div>
 
-            <button className=' px-1 md:px-2 py-1 rounded mr-1 md:mr-2 flex my-auto items-center hover:bg-gray-100 '>
+            <button onClick={() => openSidebar()} className=' px-1 md:px-2 py-1 rounded mr-1 md:mr-2 flex my-auto items-center hover:bg-gray-100 '>
               <div>
                 <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-5 h-5 sm:w-6 sm:h-6'>
                   <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z' />

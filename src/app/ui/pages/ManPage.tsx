@@ -6,10 +6,9 @@ import { useNavigate } from 'react-router-dom'
 
 interface ProductDetailsPageProps {
   addToCart: () => void
-  addToFavorites: () => void
 }
 
-export default function ManPage ({ addToCart, addToFavorites }: ProductDetailsPageProps): ReactElement {
+export default function ManPage ({ addToCart }: ProductDetailsPageProps): ReactElement {
   const [products, setProducts] = useState<ProductsResponseBody | any>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)

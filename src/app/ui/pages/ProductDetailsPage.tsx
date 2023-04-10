@@ -2,36 +2,21 @@ import React, { useEffect, useState } from 'react'
 import ProductUsecase from '../../modules/productUsecase'
 import { useParams } from 'react-router-dom'
 import { Product } from '../../api/interfaces/product/product.interface'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 interface ProductDetailsPageProps {
   addToCart: () => void
-  addToFavorites: () => void
 }
 
-export default function ProductDetailsPage ({ addToCart, addToFavorites }: ProductDetailsPageProps): JSX.Element {
+export default function ProductDetailsPage ({ addToCart }: ProductDetailsPageProps): JSX.Element {
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
   const [sizeSelected, setSizeSelected] = useState('')
 
-  // Local Storage for cart and favorites
-  const [localCartShopping, setLocalCartShopping] = useState<Product[]>(() => {
-    const cartShopping = window.localStorage.getItem('cart_shopping')
-    if (cartShopping) {
-      return JSON.parse(cartShopping)
-    }
-    return []
-  })
-
-  const [localFavorites, setLocalFavorites] = useState<Product[]>(() => {
-    const Favorites = window.localStorage.getItem('favorites')
-    if (Favorites) {
-      return JSON.parse(Favorites)
-    }
-    return []
-  })
-  // End local Storage for cart and favorites
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [storedValue, setValue] = useLocalStorage('cart_shopping', [])
 
   const { idProduct } = useParams()
 
@@ -53,61 +38,23 @@ export default function ProductDetailsPage ({ addToCart, addToFavorites }: Produ
     }
   }, [])
 
-  const handleAddToFavorites = () => {
-    addLocalFavorites()
-  }
-
   const handleAddToCart = () => {
     addLocalCart()
   }
 
-  const addLocalCart = () => {
-    if (product) {
-      if (window.localStorage.getItem('cart_shopping') === null) {
-        window.localStorage.setItem('cart_shopping', '[]')
-        setLocalCartShopping(prev => [])
-      }
-
-      setLocalCartShopping(prevCartShopping => {
-        const exist = prevCartShopping.find((e: Product) => e.code === product.code)
+  function addLocalCart () {
+    try {
+      if (product) {
+        const item = JSON.parse(localStorage.getItem('cart_shopping') ?? '[]')
+        const exist = item.find((e: Product) => e.code === product.code)
         if (!exist) {
-          const updatedCart = prevCartShopping.concat(product)
-          window.localStorage.setItem('cart_shopping', JSON.stringify(updatedCart))
-          return updatedCart
-        } else {
-          return prevCartShopping
+          setValue([...item, product])
+          console.log('se llama add to cart ')
+          addToCart()
         }
-      })
-
-      const exist = localCartShopping.find((e: Product) => e.code === product.code)
-      if (!exist) {
-        addToCart()
       }
-    }
-  }
-
-  const addLocalFavorites = () => {
-    if (product) {
-      if (window.localStorage.getItem('favorites') === null) {
-        window.localStorage.setItem('favorites', '[]')
-        setLocalCartShopping(prev => [])
-      }
-
-      setLocalFavorites(prevFavorites => {
-        const exist = prevFavorites.find((e: Product) => e.code === product.code)
-        if (!exist) {
-          const updatedCart = prevFavorites.concat(product)
-          window.localStorage.setItem('favorites', JSON.stringify(updatedCart))
-          return updatedCart
-        } else {
-          return prevFavorites
-        }
-      })
-
-      const exist = localFavorites.find((e: Product) => e.code === product.code)
-      if (!exist) {
-        addToFavorites()
-      }
+    } catch (error) {
+      setValue([])
     }
   }
 
@@ -133,12 +80,6 @@ export default function ProductDetailsPage ({ addToCart, addToFavorites }: Produ
 
           <div>
             {product.colors.map((color, index) => (
-              // <span
-              //   key={index}
-              //   className='w-6 h-6 rounded-full border border-gray-300 bg-gray-300 inline-block ml-2'
-              //   // style={{ backgroundColor: color.hex }}
-
-              // ></span>
               <span
                 key={index}
                 className='rounded-full border border-gray-300 bg-gray-300 inline-block ml-2'
@@ -179,10 +120,10 @@ export default function ProductDetailsPage ({ addToCart, addToFavorites }: Produ
           <small>{product.description}</small>
 
           <div className='flex items-center'>
-            <button onClick={() => handleAddToCart()} className='button w-56'>
+            <button onClick={() => handleAddToCart()} className='w border-2 w-56'>
               Añadir a la cesta
             </button>
-            <button onClick={() => handleAddToFavorites()} className=' bg-gray-400'>
+            <button className=' bg-gray-400'>
               Add to fav
             </button>
 

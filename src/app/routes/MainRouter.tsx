@@ -5,20 +5,27 @@ import Navbar from '../ui/components/shared/Navbar'
 import HomePage from '../ui/pages/HomePage'
 import ManPage from '../ui/pages/ManPage'
 import ProductDetailsPage from '../ui/pages/ProductDetailsPage'
+import Sidebar from '../ui/components/shared/Sidebar'
 
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable react/jsx-pascal-case */
 
 export default function MainRouter () {
-  const [countCartProducts, setCountCartProducts] = useState(0)
-  const [countFavorites, setCountFavorites] = useState(0)
+  const [countCartProducts, setCountCartProducts] = useState(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]').length)
+
+  const [showSidebar, setShowSidebar] = useState(false)
 
   const addToCart = () => {
-    setCountCartProducts(countCartProducts + 1)
+    const numberCart = JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]').length
+    setCountCartProducts(Number(numberCart))
   }
 
-  const addToFavorites = () => {
-    setCountFavorites(countFavorites + 1)
+  const openSidebar = () => {
+    setShowSidebar(true)
+  }
+
+  const closeSidebar = () => {
+    setShowSidebar(false)
   }
 
   const Sale = () => <h1>sale</h1>
@@ -31,14 +38,21 @@ export default function MainRouter () {
 
   return (
     <>
-      <Navbar countCartProducts={countCartProducts} countFavorites={countFavorites} />
+      <Navbar
+        countCartProducts={countCartProducts}
+        openSidebar={openSidebar}
+      />
+      <Sidebar
+        showSidebar={showSidebar}
+        closeSidebar={closeSidebar}
+      />
       <br /> <br /> <br />
 
       <Routes>
         <Route path='/' element={<HomePage />} />
 
-        <Route path='/hombre' element={<ManPage addToCart={addToCart} addToFavorites={addToFavorites} />} />
-        <Route path='/hombre/:idProduct' element={<ProductDetailsPage addToCart={addToCart} addToFavorites={addToFavorites} />} />
+        <Route path='/hombre' element={<ManPage addToCart={addToCart} />} />
+        <Route path='/hombre/:idProduct' element={<ProductDetailsPage addToCart={addToCart} />} />
 
         <Route path='/sale' element={<Sale />} />
         <Route path='/sale/hombre' element={<Sale_Hombre />} />

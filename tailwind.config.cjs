@@ -10,6 +10,9 @@ module.exports = {
         Modern: ['Mulish', 'sans-serif'],
         Design: ['HMregular', 'sans-serif'],
         Design02: ['CodeSaver', 'sans-serif']
+      },
+      boxShadow: {
+        top: '0 -4px 6px -1px rgba(0, 0, 0, 0.1)'
       }
     }
   },
