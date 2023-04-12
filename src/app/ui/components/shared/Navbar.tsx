@@ -1,15 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { rutasA } from '../../../../assets/json/routes'
+import MyContext from '../../../../context/MyContext'
 
-interface NavbarProps {
-  countCartProducts: number
-  openSidebar: () => void
-}
-
-export default function Navbar ({ countCartProducts, openSidebar }: NavbarProps) {
+export default function Navbar () {
   const navigate = useNavigate()
+
+  const { countCartProducts, openSidebar } = useContext(MyContext)
 
   // Para verificar en que boton genero nos encontramos
   const location = useLocation()
@@ -81,7 +79,7 @@ export default function Navbar ({ countCartProducts, openSidebar }: NavbarProps)
                   <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z' />
                 </svg>
               </div>
-              <span>({countCartProducts})</span>
+              <span>{countCartProducts.toString()}</span>
               <span className=' hidden sm:block text-sm ml-1 sm:text-base md:ml-2'>Bolsa</span>
             </button>
 

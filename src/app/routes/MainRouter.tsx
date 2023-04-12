@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Footer from '../ui/components/shared/Footer'
 import Navbar from '../ui/components/shared/Navbar'
@@ -6,27 +6,38 @@ import HomePage from '../ui/pages/HomePage'
 import ManPage from '../ui/pages/ManPage'
 import ProductDetailsPage from '../ui/pages/ProductDetailsPage'
 import Sidebar from '../ui/components/shared/Sidebar'
+import { MyContextProvider } from '../../context/MyContext'
+// import { useLocalStorage } from '../hooks/useLocalStorage'
+// import MyContext, { MyContextProvider } from '../../context/MyContext'
 
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable react/jsx-pascal-case */
 
 export default function MainRouter () {
-  const [countCartProducts, setCountCartProducts] = useState(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]').length)
+  // const [countCartProducts, setCountCartProducts] = useState(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]').length)
 
-  const [showSidebar, setShowSidebar] = useState(false)
+  // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // const [storedValue, setValue] = useLocalStorage('cart_shopping', [])
 
-  const addToCart = () => {
-    const numberCart = JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]').length
-    setCountCartProducts(Number(numberCart))
-  }
+  // const [showSidebar, setShowSidebar] = useState(false)
 
-  const openSidebar = () => {
-    setShowSidebar(true)
-  }
+  // const addToCart = () => {
+  //   const numberCart = JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]').length
+  //   setCountCartProducts(Number(numberCart))
+  // }
 
-  const closeSidebar = () => {
-    setShowSidebar(false)
-  }
+  // const deleteToCart = () => {
+  //   const numberCart = JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]').length
+  //   setCountCartProducts(Number(numberCart))
+  // }
+
+  // const openSidebar = () => {
+  //   setShowSidebar(true)
+  // }
+
+  // const closeSidebar = () => {
+  //   setShowSidebar(false)
+  // }
 
   const Sale = () => <h1>sale</h1>
   const Sale_Hombre = () => <h1>sale hombre</h1>
@@ -38,34 +49,30 @@ export default function MainRouter () {
 
   return (
     <>
-      <Navbar
-        countCartProducts={countCartProducts}
-        openSidebar={openSidebar}
-      />
-      <Sidebar
-        showSidebar={showSidebar}
-        closeSidebar={closeSidebar}
-      />
-      <br /> <br /> <br />
+      <MyContextProvider>
+        <Navbar />
+        <Sidebar />
+        <br /> <br /> <br />
 
-      <Routes>
-        <Route path='/' element={<HomePage />} />
+        <Routes>
+          <Route path='/' element={<HomePage />} />
 
-        <Route path='/hombre' element={<ManPage addToCart={addToCart} />} />
-        <Route path='/hombre/:idProduct' element={<ProductDetailsPage addToCart={addToCart} />} />
+          <Route path='/hombre' element={<ManPage />} />
+          <Route path='/hombre/:idProduct' element={<ProductDetailsPage />} />
 
-        <Route path='/sale' element={<Sale />} />
-        <Route path='/sale/hombre' element={<Sale_Hombre />} />
+          <Route path='/sale' element={<Sale />} />
+          <Route path='/sale/hombre' element={<Sale_Hombre />} />
 
-        <Route path='/ayuda' element={<Ayuda />} />
-        <Route path='/favoritos' element={<Favoritos />} />
+          <Route path='/ayuda' element={<Ayuda />} />
+          <Route path='/favoritos' element={<Favoritos />} />
 
-        <Route path='*' element={<Error />} />
-      </Routes>
+          <Route path='*' element={<Error />} />
+        </Routes>
 
-      <br />
+        <br />
 
-      <Footer />
+        <Footer />
+      </MyContextProvider>
     </>
   )
 }

@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ItemProductSidebar from '../ItemProductSidebar'
 import { Product } from '../../../api/interfaces/product/product.interface'
+import MyContext from '../../../../context/MyContext'
 
-interface SidebarProps {
-  showSidebar: boolean
-  closeSidebar: () => void
-}
-
-export default function Sidebar ({ showSidebar, closeSidebar }: SidebarProps): JSX.Element {
+export default function Sidebar (): JSX.Element {
   const [itemProducts, setItemProducts] = useState<Product[]>(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
-  const [resume, setResume] = useState(0)
+
+  const { showSidebar, closeSidebar, resumeCart, calculateResume } = useContext(MyContext)
 
   useEffect(() => {
     setItemProducts(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
     calculateResume()
-  }, [showSidebar, closeSidebar])
-
-  const calculateResume = () => {
-    const priceTotal = itemProducts.reduce((acumulador, item) => acumulador + item.price, 0)
-    setResume(() => priceTotal)
-  }
+  }, [showSidebar, closeSidebar, calculateResume])
 
   return (
     <div className=' font-Modern'>
@@ -35,18 +27,18 @@ export default function Sidebar ({ showSidebar, closeSidebar }: SidebarProps): J
           <div className='  overflow-y-auto px-5 mb-2'>
             {
               itemProducts.map((item: Product, index: number) => (
-                <ItemProductSidebar key={item._id} product={item} />
+                <ItemProductSidebar key={index} product={item} />
               ))
             }
           </div>
           <div className=' flex-shrink-0 h-80 m py-3 px-5 shadow-top block overflow-hidden'>
             <div className=' flex justify-between font-semibold text-md my-2'>
               <span>Subtotal</span>
-              <span>S/ {resume.toFixed(2)}</span>
+              <span>S/ {resumeCart.toFixed(2)}</span>
             </div>
             <div className=' flex justify-between font-bold text-xl my-4'>
               <span>Total</span>
-              <span>S/ {resume.toFixed(2)}</span>
+              <span>S/ {resumeCart.toFixed(2)}</span>
             </div>
             <p className=' my-5 block'>Simula el costo de envío en el siguiente paso.</p>
             <button className=' button w-full'>

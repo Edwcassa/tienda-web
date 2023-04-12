@@ -23,7 +23,7 @@ export default function Card ({ img, subImg, description, price, colors }: props
             <span className=' font-semibold'>{`${price}`}</span>
           </div>
         </div>
-        <div className='flex'>
+        {/* <div className='flex'>
           {
                   colors.map((e, i) => (
                     <div
@@ -33,7 +33,7 @@ export default function Card ({ img, subImg, description, price, colors }: props
                     />
                   ))
                }
-        </div>
+        </div> */}
       </div>
     </>
   )

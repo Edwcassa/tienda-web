@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Product } from '../../api/interfaces/product/product.interface'
+import MyContext from '../../../context/MyContext'
 
 interface ItemProductSidebarProps {
   product: Product
 }
 
 export default function ItemProductSidebar ({ product }: ItemProductSidebarProps): JSX.Element {
+  const { deleteToCart } = useContext(MyContext)
+
   return (
     <div className=' flex mb-8 '>
       <div className='w-4/12'>
@@ -24,7 +27,7 @@ export default function ItemProductSidebar ({ product }: ItemProductSidebarProps
         <p className=' font-bold mt-5'>S/ {product.price}</p>
       </div>
       <div className=' w-2/12 flex justify-center pt-2'>
-        <svg xmlns='http://www.w3.org/2000/svg' className='ionicon w-8 h-8 p-1 box-border hover:bg-gray-100 cursor-pointer' viewBox='0 0 512 512'>
+        <svg onClick={() => deleteToCart(product._id.toString())} xmlns='http://www.w3.org/2000/svg' className='ionicon w-8 h-8 p-1 box-border hover:bg-gray-100 cursor-pointer' viewBox='0 0 512 512'>
           <path d='M112 112l20 320c.95 18.49 14.4 32 32 32h184c17.67 0 30.87-13.51 32-32l20-320' fill='none' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='32' />
           <path stroke='currentColor' strokeLinecap='round' strokeMiterlimit='10' strokeWidth='32' d='M80 112h352' />
           <path d='M192 112V72h0a23.93 23.93 0 0124-24h80a23.93 23.93 0 0124 24h0v40M256 176v224M184 176l8 224M328 176l-8 224' fill='none' stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='32' />

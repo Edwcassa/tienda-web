@@ -4,11 +4,7 @@ import { Product } from '../../api/interfaces/product/product.interface'
 import ProductUsecase from '../../modules/productUsecase'
 import { useNavigate } from 'react-router-dom'
 
-interface ProductDetailsPageProps {
-  addToCart: () => void
-}
-
-export default function ManPage ({ addToCart }: ProductDetailsPageProps): ReactElement {
+export default function ManPage (): ReactElement {
   const [products, setProducts] = useState<ProductsResponseBody | any>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)

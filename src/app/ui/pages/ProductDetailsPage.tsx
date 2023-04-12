@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProductUsecase from '../../modules/productUsecase'
 import { useParams } from 'react-router-dom'
 import { Product } from '../../api/interfaces/product/product.interface'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
+import MyContext from '../../../context/MyContext'
 
-interface ProductDetailsPageProps {
-  addToCart: () => void
-}
-
-export default function ProductDetailsPage ({ addToCart }: ProductDetailsPageProps): JSX.Element {
+export default function ProductDetailsPage (): JSX.Element {
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -17,6 +14,8 @@ export default function ProductDetailsPage ({ addToCart }: ProductDetailsPagePro
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [storedValue, setValue] = useLocalStorage('cart_shopping', [])
+
+  const { updateCountCart } = useContext(MyContext)
 
   const { idProduct } = useParams()
 
@@ -50,7 +49,7 @@ export default function ProductDetailsPage ({ addToCart }: ProductDetailsPagePro
         if (!exist) {
           setValue([...item, product])
           console.log('se llama add to cart ')
-          addToCart()
+          updateCountCart()
         }
       }
     } catch (error) {
