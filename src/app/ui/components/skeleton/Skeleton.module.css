@@ -1,0 +1,16 @@
+.skeleton {
+  width: 10rem;
+  height: 1rem;
+  background-color: gray;
+  opacity: .7;
+  animation: skeleton-loading .8s ease-in-out infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: .7;
+  }
+  100% {
+    opacity: .3;
+  }
+}

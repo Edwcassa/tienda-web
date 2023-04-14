@@ -3,6 +3,8 @@ import { ProductsResponseBody } from '../../api/interfaces/product/products-repo
 import { Product } from '../../api/interfaces/product/product.interface'
 import ProductUsecase from '../../modules/productUsecase'
 import { useNavigate } from 'react-router-dom'
+import Card from '../components/Card'
+import Skeleton from '../components/skeleton/Skeleton'
 
 export default function ManPage (): ReactElement {
   const [products, setProducts] = useState<ProductsResponseBody | any>(null)
@@ -22,6 +24,10 @@ export default function ManPage (): ReactElement {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0) // Desplaza el scroll hacia la posición (0, 0) en la página
+  }, [])
+
+  useEffect(() => {
     getProducts('')
   }, [])
 
@@ -31,7 +37,11 @@ export default function ManPage (): ReactElement {
   }
 
   if (loading) {
-    return <p>Loading...</p>
+    return (
+      <div className=' fcenter h-[30rem]'>
+        <Skeleton />
+      </div>
+    )
   }
 
   if (error) {
@@ -41,17 +51,27 @@ export default function ManPage (): ReactElement {
   if (products) {
     return (
       <div className=' grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 w-full md:px-1'>
-        {products.data?.map((product: Product, index: number) => (
-          <div key={index} className=' flex flex-col items-center justify-center ' onClick={() => navigateDetalle(product._id)}>
-            <div className=' flex flex-col items-center justify-center '>
-              <img src={product.image} alt={product.title} className=' w-48 h-48 object-cover ' />
-              <div className=' flex flex-col items-center justify-center '>
-                <p className=' text-sm font-semibold text-center '>{product.title}</p>
-                <p className=' text-sm font-semibold text-center '>{product.price}</p>
-              </div>
+        {
+          products.data?.map((product: Product, index: number) => (
+            // <div key={index} className=' flex flex-col items-center justify-center ' onClick={() => navigateDetalle(product._id)}>
+            //   <div className=' flex flex-col items-center justify-center '>
+            //     <img src={product.image} alt={product.title} className=' w-48 h-48 object-cover ' />
+            //     <div className=' flex flex-col items-center justify-center '>
+            //       <p className=' text-sm font-semibold text-center '>{product.title}</p>
+            //       <p className=' text-sm font-semibold text-center '>{product.price}</p>
+            //     </div>
+            //   </div>
+            // </div>
+            <div key={index} onClick={() => navigateDetalle(product._id)}>
+              <Card
+                img={product.image}
+                subImg={product.image}
+                description={product.title}
+                price={product.price}
+              />
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     )
   }

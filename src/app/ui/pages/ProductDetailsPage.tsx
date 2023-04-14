@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Product } from '../../api/interfaces/product/product.interface'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import MyContext from '../../../context/MyContext'
+import Skeleton from '../components/skeleton/Skeleton'
 
 export default function ProductDetailsPage (): JSX.Element {
   const [product, setProduct] = useState<Product | null>(null)
@@ -32,6 +33,10 @@ export default function ProductDetailsPage (): JSX.Element {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0) // Desplaza el scroll hacia la posición (0, 0) en la página
+  }, [])
+
+  useEffect(() => {
     if (idProduct) {
       getProduct(idProduct)
     }
@@ -58,7 +63,11 @@ export default function ProductDetailsPage (): JSX.Element {
   }
 
   if (loading) {
-    return <p>Loading...</p>
+    return (
+      <div className=' fcenter h-[30rem]'>
+        <Skeleton />
+      </div>
+    )
   }
 
   if (error) {
@@ -76,12 +85,13 @@ export default function ProductDetailsPage (): JSX.Element {
           <small className=' text-gray-500'>Ref {product.code}</small>
           <p className='font-bold text-lg mt-2'>S/ {product.price}</p>
           {/* <p>{product.description}</p> */}
+          <br />
 
           <div>
             {product.colors.map((color, index) => (
               <span
                 key={index}
-                className='rounded-full border border-gray-300 bg-gray-300 inline-block ml-2'
+                className='rounded-full border border-gray-300 bg-gray-300 inline-block'
               >
                 {color.colorName}
               </span>
@@ -115,11 +125,14 @@ export default function ProductDetailsPage (): JSX.Element {
             }
           </div>
 
-          <small className=' font-normal mr-2'>Guia de tallas</small>
+          <small className=' font-normal mr-2'>Guia de tallas: </small>
           <small>{product.description}</small>
 
+          <br />
+          <br />
+
           <div className='flex items-center'>
-            <button onClick={() => handleAddToCart()} className='w border-2 w-56'>
+            <button onClick={() => handleAddToCart()} className=' button border-2 w-56'>
               Añadir a la cesta
             </button>
             <button className=' bg-gray-400'>
