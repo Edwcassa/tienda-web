@@ -101,7 +101,7 @@ export default function ProductDetailsPage (): JSX.Element {
 
           <p className=' text-sm font-semibold my-5'>Selecciona talla</p>
 
-          <div className='flex flex-row mb-3'>
+          <div className='flex flex-row my-3'>
             {
               product.sizes.map((e, i) => (
                 <div className='form-check w-16' key={i}>
@@ -113,9 +113,9 @@ export default function ProductDetailsPage (): JSX.Element {
                   />
                   <label className='form-check-label' htmlFor={`radio${i}`}>
                     <span
-                      className={`w-12 h-12 grid place-content-center rounded-full border-[1px] cursor-pointer
+                      className={`w-10 h-10 grid place-content-center rounded-full border-[1px] cursor-pointer
                                   border-gray-400 hover:border-gray-600
-                                    ${e === sizeSelected && 'bg-gray-100 text-black'}`}
+                                    ${e === sizeSelected && 'text-white bg-black'}`}
                     >
                       {e}
                     </span>
@@ -125,15 +125,23 @@ export default function ProductDetailsPage (): JSX.Element {
             }
           </div>
 
-          <small className=' font-normal mr-2'>Guia de tallas: </small>
-          <small>{product.description}</small>
+          <div className=' flex items-center mt-7'>
+            <svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24' fill='none' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+              <path d='M16 2l6 6L8 22l-6-6L16 2' /> <path d='M7.5 10.5l2 2' /> <path d='M10.5 7.5l2 2' /> <path d='M13.5 4.5l2 2' /> <path d='M4.5 13.5l2 2' />
+            </svg>
+
+            <div>
+              <small className=' font-normal mx-2'>Guia de tallas: </small>
+              <small>{product.description}</small>
+            </div>
+          </div>
 
           <br />
           <br />
 
           <div className='flex items-center'>
             <button onClick={() => handleAddToCart()} className=' button border-2 w-56'>
-              Añadir a la cesta
+              AÑADIR A LA CESTA
             </button>
             <button className=' bg-gray-400'>
               Add to fav
