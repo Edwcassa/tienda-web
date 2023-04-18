@@ -68,7 +68,7 @@ export default function Sidebar (): JSX.Element {
               <span>S/ {resumeCart.toFixed(2)}</span>
             </div>
             <p className=' my-5 text-xs font-bold block'>Simula el costo de envío en el siguiente paso.</p>
-            <button className=' button w-full'>
+            <button className=' button w-full' onClick={() => navigate('/checkout')}>
               <span className=' font-bold'>COMPRAR AHORA</span>
             </button>
           </div>

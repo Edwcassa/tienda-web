@@ -50,7 +50,7 @@ export default function ManPage (): ReactElement {
 
   if (products) {
     return (
-      <div className=' grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 w-full md:px-1'>
+      <div className=' grid mx-auto grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 w-full md:px-1'>
         {
           products.data?.map((product: Product, index: number) => (
             // <div key={index} className=' flex flex-col items-center justify-center ' onClick={() => navigateDetalle(product._id)}>

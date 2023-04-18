@@ -6,7 +6,6 @@ import HomePage from '../ui/pages/HomePage'
 import ManPage from '../ui/pages/ManPage'
 import ProductDetailsPage from '../ui/pages/ProductDetailsPage'
 import Sidebar from '../ui/components/shared/Sidebar'
-import { MyContextProvider } from '../../context/MyContext'
 
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable react/jsx-pascal-case */
@@ -22,32 +21,30 @@ export default function MainRouter () {
 
   return (
     <>
-      <MyContextProvider>
-        <Navbar />
-        <Sidebar />
-        <br /> <br /> <br />
+      <Navbar />
+      <Sidebar />
+      <br /> <br /> <br />
 
-        <div className=' min-h-[30rem]'>
-          <Routes>
-            <Route path='/' element={<HomePage />} />
+      <div className=' min-h-[30rem]'>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
 
-            <Route path='/hombre' element={<ManPage />} />
-            <Route path='/hombre/:idProduct' element={<ProductDetailsPage />} />
+          <Route path='/hombre' element={<ManPage />} />
+          <Route path='/hombre/:idProduct' element={<ProductDetailsPage />} />
 
-            <Route path='/sale' element={<Sale />} />
-            <Route path='/sale/hombre' element={<Sale_Hombre />} />
+          <Route path='/sale' element={<Sale />} />
+          <Route path='/sale/hombre' element={<Sale_Hombre />} />
 
-            <Route path='/ayuda' element={<Ayuda />} />
-            <Route path='/favoritos' element={<Favoritos />} />
+          <Route path='/ayuda' element={<Ayuda />} />
+          <Route path='/favoritos' element={<Favoritos />} />
 
-            <Route path='*' element={<Error />} />
-          </Routes>
-        </div>
+          <Route path='*' element={<Error />} />
+        </Routes>
+      </div>
 
-        <br />
+      <br />
 
-        <Footer />
-      </MyContextProvider>
+      <Footer />
     </>
   )
 }

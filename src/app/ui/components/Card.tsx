@@ -11,7 +11,7 @@ export default function Card ({ img, subImg, description, price, colors }: props
   const [hover, setHover] = useState(false)
   return (
     <>
-      <div className=' mb-10 mx-auto cursor-pointer'>
+      <div className=' mb-10 flex flex-col items-center cursor-pointer'>
         <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
           {!hover && <img src={img} alt='' className=' object-cover object-center h-[17rem] sm:h-[20rem] md:h-[25rem] lg:h-[31rem] ' />}
           {hover && <img src={subImg} alt='' className=' object-cover object-center h-[17rem] sm:h-[20rem] md:h-[25rem] lg:h-[31rem] ' />}
@@ -23,17 +23,6 @@ export default function Card ({ img, subImg, description, price, colors }: props
             <span className=' font-bold'>{`${price}`}</span>
           </div>
         </div>
-        {/* <div className='flex'>
-          {
-                  colors.map((e, i) => (
-                    <div
-                      title={e.name}
-                      style={{ backgroundColor: `${e.code}` }} key={i}
-                      className=' rounded-full w-3 h-3 mx-1 border'
-                    />
-                  ))
-               }
-        </div> */}
       </div>
     </>
   )
