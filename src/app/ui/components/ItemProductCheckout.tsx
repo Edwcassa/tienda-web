@@ -42,8 +42,6 @@ export default function ItemProductCheckout ({ product, size, quantity, setItemP
             <select defaultValue={quantity} name='quantity' id='quantity' className=' w-20 my-3 border-2 outline-none'>
               <option value='1'>1</option>
               <option value='2'>2</option>
-              <option value='3'>3</option>
-              {/* <option value='4'>4</option> */}
             </select>
           </div>
         </div>

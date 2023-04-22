@@ -53,15 +53,6 @@ export default function ManPage (): ReactElement {
       <div className=' grid mx-auto grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 w-full md:px-1'>
         {
           products.data?.map((product: Product, index: number) => (
-            // <div key={index} className=' flex flex-col items-center justify-center ' onClick={() => navigateDetalle(product._id)}>
-            //   <div className=' flex flex-col items-center justify-center '>
-            //     <img src={product.image} alt={product.title} className=' w-48 h-48 object-cover ' />
-            //     <div className=' flex flex-col items-center justify-center '>
-            //       <p className=' text-sm font-semibold text-center '>{product.title}</p>
-            //       <p className=' text-sm font-semibold text-center '>{product.price}</p>
-            //     </div>
-            //   </div>
-            // </div>
             <div key={index} onClick={() => navigateDetalle(product._id)}>
               <Card
                 img={product.image}

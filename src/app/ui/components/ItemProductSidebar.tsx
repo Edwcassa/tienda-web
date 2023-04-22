@@ -12,7 +12,6 @@ export default function ItemProductSidebar ({ product }: ItemProductSidebarProps
   return (
     <div className=' flex mb-8 '>
       <div className='w-4/12'>
-        {/* <img src='https://hmperu.vtexassets.com/arquivos/ids/3678704-96-auto' alt='' /> */}
         <img src={product.image} alt='' />
       </div>
       <div className=' w-6/12 pl-2'>
@@ -21,8 +20,6 @@ export default function ItemProductSidebar ({ product }: ItemProductSidebarProps
         <select name='quantity' id='quantity' className=' w-20 my-3 border-2 outline-none'>
           <option value='1'>1</option>
           <option value='2'>2</option>
-          <option value='3'>3</option>
-          {/* <option value='4'>4</option> */}
         </select>
         <p className=' font-bold mt-5'>S/ {product.price}</p>
       </div>
