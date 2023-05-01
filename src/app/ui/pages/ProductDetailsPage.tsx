@@ -11,14 +11,15 @@ export default function ProductDetailsPage (): JSX.Element {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
-  const [sizeSelected, setSizeSelected] = useState('')
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [storedValue, setValue] = useLocalStorage('cart_shopping', [])
 
-  const { updateCountCart } = useContext(MyContext)
+  const { addToCart } = useContext(MyContext)
 
   const { idProduct } = useParams()
+
+  const [colorSelected, setColorSelected] = useState<string>('')
+  const [sizeSelected, setSizeSelected] = useState<string>('')
 
   const getProduct = async (idProduct: string) => {
     try {
@@ -42,26 +43,6 @@ export default function ProductDetailsPage (): JSX.Element {
     }
   }, [])
 
-  const handleAddToCart = () => {
-    addLocalCart()
-  }
-
-  function addLocalCart () {
-    try {
-      if (product) {
-        const item = JSON.parse(localStorage.getItem('cart_shopping') ?? '[]')
-        const exist = item.find((e: Product) => e.code === product.code)
-        if (!exist) {
-          setValue([...item, product])
-          console.log('se llama add to cart ')
-          updateCountCart()
-        }
-      }
-    } catch (error) {
-      setValue([])
-    }
-  }
-
   if (loading) {
     return (
       <div className=' fcenter h-[30rem]'>
@@ -78,6 +59,8 @@ export default function ProductDetailsPage (): JSX.Element {
     return (
       <div className='flex'>
         <div className='w-[50%]'>
+          <span>{colorSelected}</span>
+          <span>{sizeSelected}</span>
           <img src={product.image} alt={product.title} className='w-full h-[80%] object-cover' />
         </div>
         <article className='w-[50%] p-10 font-Modern'>
@@ -87,14 +70,22 @@ export default function ProductDetailsPage (): JSX.Element {
           {/* <p>{product.description}</p> */}
           <br />
 
-          <div>
+          <div className=' flex '>
             {product.colors.map((color, index) => (
-              <span
-                key={index}
-                className='rounded-full border border-gray-300 bg-gray-300 inline-block'
-              >
-                {color.colorName}
-              </span>
+              <div className='form-check w-20 mr-3' key={index} title={color.colorName}>
+                <input
+                  className='form-check-input hidden' id={`radio_color${index}`} type='radio' name='img'
+                  value={color.colorName}
+                  onChange={(e) => setColorSelected(e.target.value)}
+                  checked={colorSelected === color.colorName}
+                />
+                <label className='form-check-label' htmlFor={`radio_color${index}`}>
+                  <img
+                    src={color.colorImages[5]} alt={color.colorName}
+                    className={`w-20 object-cover border-[1px] cursor-pointer ${color.colorName === colorSelected && 'bordeC'}`}
+                  />
+                </label>
+              </div>
             )
             )}
           </div>
@@ -106,12 +97,12 @@ export default function ProductDetailsPage (): JSX.Element {
               product.sizes.map((e, i) => (
                 <div className='form-check w-16' key={i}>
                   <input
-                    className='form-check-input hidden' id={`radio${i}`} type='radio' name='img'
+                    className='form-check-input hidden' id={`radio_size${i}`} type='radio' name='img'
                     value={e}
                     onChange={(e) => setSizeSelected(e.target.value)}
                     checked={sizeSelected === e}
                   />
-                  <label className='form-check-label' htmlFor={`radio${i}`}>
+                  <label className='form-check-label' htmlFor={`radio_size${i}`}>
                     <span
                       className={`w-10 h-10 grid place-content-center rounded-full border-[1px] cursor-pointer
                                   border-gray-400 hover:border-gray-600
@@ -140,7 +131,7 @@ export default function ProductDetailsPage (): JSX.Element {
           <br />
 
           <div className='flex items-center'>
-            <button onClick={() => handleAddToCart()} className=' button border-2 w-56'>
+            <button onClick={() => addToCart(product, colorSelected, sizeSelected)} className=' button w-56'>
               AÑADIR A LA CESTA
             </button>
             <button className=' bg-gray-400'>

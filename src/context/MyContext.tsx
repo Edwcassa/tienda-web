@@ -1,12 +1,15 @@
 import { createContext, useState } from 'react'
 import { Product } from '../app/api/interfaces/product/product.interface'
 import { useLocalStorage } from '../app/hooks/useLocalStorage'
+import { LocalCart } from '../app/api/interfaces/cart/localCart.interface'
+import { Color } from '../app/api/interfaces/product/color.interface'
 
 interface MyContextProps {
   storedValue: Product[]
   countCartProducts: number
   updateCountCart: () => void
   deleteToCart: (id: string) => void
+  addToCart: (product: Product, colorName: string, size: string) => void
   calculateResume: () => void
 
   showSidebar: Boolean
@@ -24,6 +27,7 @@ export const initialContextValue: MyContextProps = {
   countCartProducts: 0,
   updateCountCart: () => {},
   deleteToCart: (id: string) => {},
+  addToCart: (product: Product, colorName: string, size: string) => {},
   calculateResume: () => {},
 
   showSidebar: false,
@@ -59,6 +63,31 @@ export const MyContextProvider = ({ children }: MyContextProviderProps) => {
     calculateResume()
   }
 
+  function addToCart (product: Product, colorName: string, size: string) {
+    try {
+      if (product) {
+        const item = JSON.parse(localStorage.getItem('cart_shopping') ?? '[]')
+        const exist = item.find((e: LocalCart) => e.code === product.code)
+        if (!exist) {
+          const colorObject = product.colors.find((e: Color) => e.colorName === colorName) ?? null
+          const productCart: LocalCart = {
+            _id: product._id,
+            code: product.code,
+            title: product.title,
+            price: product.price,
+            size,
+            color: colorObject
+          }
+          setValue([...item, productCart])
+          console.log('se llama add to cart ')
+          updateCountCart()
+        }
+      }
+    } catch (error) {
+      setValue([])
+    }
+  }
+
   const calculateResume = () => {
     const productsCart = JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]')
     const priceTotal = productsCart.reduce((acumulador: number, item: Product) => acumulador + item.price, 0)
@@ -81,6 +110,7 @@ export const MyContextProvider = ({ children }: MyContextProviderProps) => {
 
     updateCountCart,
     deleteToCart,
+    addToCart,
     calculateResume,
     openSidebar,
     closeSidebar
