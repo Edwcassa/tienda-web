@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { Product } from '../../api/interfaces/product/product.interface'
 import MyContext from '../../../context/MyContext'
+import { ItemLocalCart } from '../../api/interfaces/cart/localCart.interface'
 
 interface ItemProductSidebarProps {
-  product: Product
+  product: ItemLocalCart
 }
 
 export default function ItemProductSidebar ({ product }: ItemProductSidebarProps): JSX.Element {
@@ -12,11 +12,11 @@ export default function ItemProductSidebar ({ product }: ItemProductSidebarProps
   return (
     <div className=' flex mb-8 '>
       <div className='w-4/12'>
-        <img src={product.image} alt='' />
+        <img src={product.color?.colorImages[0]} alt='' />
       </div>
       <div className=' w-6/12 pl-2'>
         <p className=' font-semibold my-2'>{product.title}</p>
-        <p className=' text-gray-500 font-bold text-sm'>Talla: 34</p>
+        <p className=' text-gray-500 font-bold text-sm'>Talla: {product.size}</p>
         <select name='quantity' id='quantity' className=' w-20 my-3 border-2 outline-none'>
           <option value='1'>1</option>
           <option value='2'>2</option>

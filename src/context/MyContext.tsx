@@ -1,11 +1,11 @@
 import { createContext, useState } from 'react'
 import { Product } from '../app/api/interfaces/product/product.interface'
 import { useLocalStorage } from '../app/hooks/useLocalStorage'
-import { LocalCart } from '../app/api/interfaces/cart/localCart.interface'
+import { ItemLocalCart } from '../app/api/interfaces/cart/localCart.interface'
 import { Color } from '../app/api/interfaces/product/color.interface'
 
 interface MyContextProps {
-  storedValue: Product[]
+  storedValue: ItemLocalCart[]
   countCartProducts: number
   updateCountCart: () => void
   deleteToCart: (id: string) => void
@@ -57,7 +57,7 @@ export const MyContextProvider = ({ children }: MyContextProviderProps) => {
 
   const deleteToCart = (idProduct: string) => {
     const productsCart = JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]')
-    const newArray = productsCart.filter((obj: Product) => obj._id !== idProduct)
+    const newArray = productsCart.filter((obj: ItemLocalCart) => obj._id !== idProduct)
     setValue(newArray)
     updateCountCart()
     calculateResume()
@@ -67,10 +67,10 @@ export const MyContextProvider = ({ children }: MyContextProviderProps) => {
     try {
       if (product) {
         const item = JSON.parse(localStorage.getItem('cart_shopping') ?? '[]')
-        const exist = item.find((e: LocalCart) => e.code === product.code)
+        const exist = item.find((e: ItemLocalCart) => e.code === product.code)
         if (!exist) {
           const colorObject = product.colors.find((e: Color) => e.colorName === colorName) ?? null
-          const productCart: LocalCart = {
+          const productCart: ItemLocalCart = {
             _id: product._id,
             code: product.code,
             title: product.title,
@@ -90,7 +90,7 @@ export const MyContextProvider = ({ children }: MyContextProviderProps) => {
 
   const calculateResume = () => {
     const productsCart = JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]')
-    const priceTotal = productsCart.reduce((acumulador: number, item: Product) => acumulador + item.price, 0)
+    const priceTotal = productsCart.reduce((acumulador: number, item: ItemLocalCart) => acumulador + item.price, 0)
     setResumeCart(priceTotal)
   }
 

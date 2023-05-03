@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ItemProductSidebar from '../ItemProductSidebar'
-import { Product } from '../../../api/interfaces/product/product.interface'
 import MyContext from '../../../../context/MyContext'
 import { useNavigate } from 'react-router-dom'
+import { ItemLocalCart } from '../../../api/interfaces/cart/localCart.interface'
 
 export default function Sidebar (): JSX.Element {
-  const [itemProducts, setItemProducts] = useState<Product[]>(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
+  const [itemProducts, setItemProducts] = useState<ItemLocalCart[]>(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
 
   const { showSidebar, closeSidebar, resumeCart, calculateResume } = useContext(MyContext)
 
@@ -57,7 +57,7 @@ export default function Sidebar (): JSX.Element {
         <div className='flex flex-col justify-between h-full min-w-[24rem] overflow-hidden'>
           <div className='  overflow-y-auto px-5 mb-2'>
             {
-                itemProducts.map((item: Product, index: number) => (
+                itemProducts.map((item: ItemLocalCart, index: number) => (
                   <ItemProductSidebar key={index} product={item} />
                 ))
               }
