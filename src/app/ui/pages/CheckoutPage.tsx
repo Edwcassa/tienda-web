@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Product } from '../../api/interfaces/product/product.interface'
 import ItemProductCheckout from '../components/ItemProductCheckout'
 import ProductUsecase from '../../modules/productUsecase'
 import { ProductResponseBody } from '../../api/interfaces/product/product-reponse-body'
+import { ItemLocalCart } from '../../api/interfaces/cart/localCart.interface'
 
 export default function CheckoutPage () {
   const navigate = useNavigate()
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [itemProducts, setItemProducts] = useState<Product[]>(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
+  const [itemProducts, setItemProducts] = useState<ItemLocalCart[]>(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
 
-  const productIds = itemProducts.map((itemProduct: Product) => itemProduct._id)
+  const productIds = itemProducts.map((itemProduct: ItemLocalCart) => itemProduct._id)
 
   const [productsCheckout, setProductsCheckout] = useState<ProductResponseBody[]>([])
   const [loading, setLoading] = useState(false)
@@ -25,7 +25,7 @@ export default function CheckoutPage () {
       try {
         const productDataArray = await Promise.all(productIds.map(async productId => await ProductUsecase.getProduct(productId)))
         setProductsCheckout(productDataArray)
-        console.log(productDataArray)
+        // console.log(productDataArray)
       } catch (error: any) {
         console.error(error)
         setError(error.toString())
@@ -79,7 +79,14 @@ export default function CheckoutPage () {
                     </div>
                     {
                       productsCheckout.map((product, index) => (
-                        <ItemProductCheckout key={index} product={product.product} size='M' quantity={2} setItemProducts={setItemProducts} />
+                        <ItemProductCheckout
+                          key={index}
+                          product={product.product}
+                          size={itemProducts[index].size}
+                          color={itemProducts[index].color}
+                          quantity={2}
+                          setItemProducts={setItemProducts}
+                        />
                       ))
                     }
                   </div>

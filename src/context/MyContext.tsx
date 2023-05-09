@@ -67,7 +67,7 @@ export const MyContextProvider = ({ children }: MyContextProviderProps) => {
     try {
       if (product) {
         const item = JSON.parse(localStorage.getItem('cart_shopping') ?? '[]')
-        const exist = item.find((e: ItemLocalCart) => e.code === product.code)
+        const exist = item.find((e: ItemLocalCart) => e.code === product.code && e.size === size && e.color?.colorName === colorName)
         if (!exist) {
           const colorObject = product.colors.find((e: Color) => e.colorName === colorName) ?? null
           const productCart: ItemLocalCart = {

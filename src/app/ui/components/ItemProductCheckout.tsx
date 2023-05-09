@@ -1,15 +1,17 @@
 import React, { useContext, useEffect } from 'react'
 import { Product } from '../../api/interfaces/product/product.interface'
 import MyContext from '../../../context/MyContext'
+import { Color } from '../../api/interfaces/product/color.interface'
 
 interface ItemProductSidebarProps {
   product: Product
   size: string
+  color: Color | null
   quantity: number
   setItemProducts: (arr: any) => void
 }
 
-export default function ItemProductCheckout ({ product, size, quantity, setItemProducts }: ItemProductSidebarProps): JSX.Element {
+export default function ItemProductCheckout ({ product, size, color, quantity, setItemProducts }: ItemProductSidebarProps): JSX.Element {
   const { deleteToCart } = useContext(MyContext)
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function ItemProductCheckout ({ product, size, quantity, setItemP
       <div className=' flex justify-center w-full mt-5'>
         <div className='w-7/12'>
           <div className=' h-full flex items-center'>
-            <img width={130} src={product.image} alt='' />
+            <img width={130} src={color?.colorImages[0]} alt='' />
             <div className=' pr-10 ml-5'>
               <p className=' font-semibold mb-3'>
                 {product.title}
@@ -30,7 +32,7 @@ export default function ItemProductCheckout ({ product, size, quantity, setItemP
               <span className=' font-semibold'>{size}</span>
               <br />
               <span>Color: </span>
-              <span className=' font-semibold'>{size}</span>
+              <span className=' font-semibold'>{color?.colorName}</span>
               <br />
               <br />
               <small className=' font-bold text-gray-700'>H&M Perú</small>
