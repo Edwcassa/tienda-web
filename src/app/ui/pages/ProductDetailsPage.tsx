@@ -160,9 +160,6 @@ export default function ProductDetailsPage (): JSX.Element {
               <button onClick={() => handleAddToCart(product, colorSelected, sizeSelected)} className=' button w-56'>
                 AÑADIR A LA CESTA
               </button>
-              {/* <button className=' bg-gray-400'>
-              Add to fav
-            </button> */}
 
             </div>
 

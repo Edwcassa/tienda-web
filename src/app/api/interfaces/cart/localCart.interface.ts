@@ -5,6 +5,7 @@ export interface ItemLocalCart {
   code: string
   title: string
   price: number
+  quantity: number
   size: string
   color: Color | null
 }
