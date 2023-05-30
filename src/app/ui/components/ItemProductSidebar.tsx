@@ -23,7 +23,7 @@ export default function ItemProductSidebar ({ index, product }: ItemProductSideb
       <div className=' w-6/12 pl-2'>
         <p className=' font-semibold my-2'>{product.title}</p>
         <p className=' text-gray-500 font-bold text-sm'>Talla: {product.size}</p>
-        <select onChange={(event) => onchange(event)} name='quantity' id='quantity' className=' w-20 my-3 border-2 outline-none'>
+        <select onChange={(event) => onchange(event)} value={product.quantity} name='quantity' id='quantity' className=' w-20 my-3 border-2 outline-none'>
           <option value='1'>1</option>
           <option value='2'>2</option>
         </select>

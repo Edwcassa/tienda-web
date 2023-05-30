@@ -4,7 +4,7 @@ import MyContext from '../../../../context/MyContext'
 import { useNavigate } from 'react-router-dom'
 import { ItemLocalCart } from '../../../api/interfaces/cart/localCart.interface'
 
-export default function Sidebar (): JSX.Element {
+export default function Sidebar(): JSX.Element {
   const [itemProducts, setItemProducts] = useState<ItemLocalCart[]>(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
 
   const { showSidebar, closeSidebar, resumeCart, calculateResume } = useContext(MyContext)
@@ -57,10 +57,10 @@ export default function Sidebar (): JSX.Element {
         <div className='flex flex-col justify-between h-full min-w-[24rem] overflow-hidden'>
           <div className='  overflow-y-auto px-5 mb-2'>
             {
-                itemProducts.map((item: ItemLocalCart, index: number) => (
-                  <ItemProductSidebar key={index} product={item} />
-                ))
-              }
+              itemProducts.map((item: ItemLocalCart, index: number) => (
+                <ItemProductSidebar key={index} product={item} index={index} />
+              ))
+            }
           </div>
           <div className=' flex-shrink-0 h-72 m py-3 px-5 shadow-top block overflow-hidden text-[#292929]'>
             <div className=' flex justify-between font-bold text-xl my-4'>

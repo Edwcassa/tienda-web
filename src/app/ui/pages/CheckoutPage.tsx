@@ -5,13 +5,13 @@ import ProductUsecase from '../../modules/productUsecase'
 import { ProductResponseBody } from '../../api/interfaces/product/product-reponse-body'
 import { ItemLocalCart } from '../../api/interfaces/cart/localCart.interface'
 
-export default function CheckoutPage () {
+export default function CheckoutPage() {
   const navigate = useNavigate()
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [itemProducts, setItemProducts] = useState<ItemLocalCart[]>(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
+  const [cart, setCart] = useState<ItemLocalCart[]>(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
 
-  const productIds = itemProducts.map((itemProduct: ItemLocalCart) => itemProduct._id)
+  const productIds = cart.map((itemProduct: ItemLocalCart) => itemProduct._id)
 
   const [productsCheckout, setProductsCheckout] = useState<ProductResponseBody[]>([])
   const [loading, setLoading] = useState(false)
@@ -39,7 +39,24 @@ export default function CheckoutPage () {
     }
   }, [])
 
-  const totalPrice = productsCheckout.reduce((acc, item) => acc + item.product.price, 0)
+  function calculateResume(): number {
+    var sum = 0
+    cart.forEach(prodLocal => {
+      const prod = productsCheckout.find(e => e.product._id == prodLocal._id)
+      if (prod) {
+        sum = sum + (prod.product.price) * prodLocal.quantity
+      }
+    })
+
+    return sum
+  }
+
+  useEffect(() => {
+    calculateResume()
+  }, [productsCheckout, cart])
+
+  // console.log("los prod: ", productsCheckout)
+  // console.log("el cart: ", cart)
 
   return (
     <>
@@ -61,17 +78,17 @@ export default function CheckoutPage () {
           !loading && !error && productsCheckout && (
             <>
               <Link to='/hombre' className='my-5'>
-                <div className=' flex items-center'>
+                {/* <div className=' flex items-center'>
                   <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='1.5' stroke='currentColor' className='w-4 h-4'>
                     <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
                   </svg>
                   <p className=' text-sm font-semibold '>Continuar comprando</p>
-                </div>
+                </div> */}
               </Link>
-              <div className=' flex flex-col lg:flex-row w-full'>
-                <div className=' lg:w-8/12 bg-white'>
-                  <div className='  h-auto bg-white flex flex-col p-5'>
-                    <div className=' flex justify-center w-full h-8 pb-5 border-b-2'>
+              <div className=' flex flex-col h-56 lg:flex-row w-full'>
+                <div className=' lg:w-8/12 bg-white h-auto'>
+                  <div className='  bg-white flex p-3 flex-col'>
+                    <div className=' flex justify-center w-full py-2 border-b-2 font-semibold text-[0.95rem]'>
                       <p className=' w-7/12'>Producto</p>
                       <p className=' w-2/12 text-center'>Cantidad</p>
                       <p className=' w-2/12 text-center'>Precio</p>
@@ -81,11 +98,15 @@ export default function CheckoutPage () {
                       productsCheckout.map((product, index) => (
                         <ItemProductCheckout
                           key={index}
+                          index={index}
                           product={product.product}
-                          size={itemProducts[index].size}
-                          color={itemProducts[index].color}
-                          quantity={2}
-                          setItemProducts={setItemProducts}
+                          size={cart[index].size}
+                          color={cart[index].color}
+                          quantity={cart[index].quantity}
+                          productsCheckout={productsCheckout}
+                          setProductsCheckout={setProductsCheckout}
+                          cartProduct={cart[index]}
+                          setCart={setCart}
                         />
                       ))
                     }
@@ -94,12 +115,12 @@ export default function CheckoutPage () {
                 <div className=' mx-10 w-4/12 h-64 p-5 bg-white'>
                   <div className=' flex justify-between'>
                     <span className=' text-sm'>Subtotal</span>
-                    <span className=' text-sm'>S/. {totalPrice.toFixed(2)}</span>
+                    <span className=' text-sm'>S/. {calculateResume()}</span>
                   </div>
                   <hr className=' my-4' />
                   <div className=' flex justify-between'>
                     <span className=' text-xl font-bold'>Total</span>
-                    <span className=' text-xl font-bold'>S/. {totalPrice.toFixed(2)}</span>
+                    <span className=' text-xl font-bold'>S/. {calculateResume()}</span>
                   </div>
 
                   <br />
@@ -108,8 +129,6 @@ export default function CheckoutPage () {
                   <label htmlFor='checkbox_id' className=' text-sm'>
                     He leído y acepto los
                     <a href='http://hola' target='_blank' rel='noopener noreferrer'><b className=' underline mx-1'>Términos y condiciones</b></a>
-                    y la
-                    <a href='http://hola' target='_blank' rel='noopener noreferrer'><b className=' underline mx-1'>Política de Privacidad</b></a>
                   </label>
 
                   <br />
