@@ -1,20 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap');
 
 #root {
+  --color-primary: #2a7a93;
+  --color-label-form: #b18500;
+}
+
+
+#root {
   /* max-width: 1280px; */
   max-width: 1400px;
   margin: 0 auto;
   /* padding: 2rem; */
   /* text-align: center; */
 }
+
 .logo {
   /* height: 6em; */
   /* padding: 1.5em; */
   will-change: filter;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -23,10 +32,12 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 .read-the-docs {
   border: 5px solid pink;
 }
@@ -37,5 +48,88 @@
   }
 } */
 .App {
-   /* border: 2px solid yellowgreen; */
+  /* border: 2px solid yellowgreen; */
 }
+
+.form_container {
+  width: 60%;
+}
+
+.form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form span {
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.form > div {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.form main div {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.form main select {
+  width: 100%;
+}
+
+.form main div:nth-child(1) {
+  margin-right: 10px;
+}
+
+.form div:focus-within label {
+  color: var(--color-label-form);
+}
+
+.form main div:focus-within label {
+  color: var(--color-label-form);
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input {
+  outline: none;
+  border: 1px solid #ccc;
+  height: 32px;
+  padding: 15px 10px;
+  border-radius: 5px;
+}
+
+.form input:focus {
+  border: 1px solid #aaa;
+  background-color: #eee;
+}
+
+.form select {
+  outline: none;
+  border: 1px solid #ccc;
+  height: 32px;
+  border-radius: 5px;
+  background-color: #eee;
+  padding: 0 10px;
+}
+
+.form .option {
+  color: #2a7a93;
+  background-color: #eee;
+  padding: 10px;
+}
+
+.select {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.resume_container {
+  width: 40%;
+}
+

@@ -4,7 +4,7 @@ import MyContext from '../../../../context/MyContext'
 import { useNavigate } from 'react-router-dom'
 import { ItemLocalCart } from '../../../api/interfaces/cart/localCart.interface'
 
-export default function Sidebar(): JSX.Element {
+export default function Sidebar (): JSX.Element {
   const [itemProducts, setItemProducts] = useState<ItemLocalCart[]>(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
 
   const { showSidebar, closeSidebar, resumeCart, calculateResume } = useContext(MyContext)

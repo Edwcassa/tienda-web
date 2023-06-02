@@ -17,14 +17,14 @@ interface ItemProductSidebarProps {
   setCart: (arr: any) => void
 }
 
-export default function ItemProductCheckout({ index, product, size, color, quantity, productsCheckout, setProductsCheckout, cartProduct, setCart }: ItemProductSidebarProps): JSX.Element {
+export default function ItemProductCheckout ({ index, product, size, color, quantity, productsCheckout, setProductsCheckout, cartProduct, setCart }: ItemProductSidebarProps): JSX.Element {
   const { deleteToCart, increaseQuantityCart, calculateResume } = useContext(MyContext)
 
   useEffect(() => {
     setCart(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
   }, [deleteToCart])
 
-  function remove() {
+  function remove () {
     deleteToCart(index)
     const temp = productsCheckout
     temp.splice(index, 1)
@@ -33,7 +33,7 @@ export default function ItemProductCheckout({ index, product, size, color, quant
     console.log(index)
   }
 
-  function onchange(event : any) {
+  function onchange (event: any) {
     increaseQuantityCart(cartProduct, parseInt(event.target.value))
     calculateResume()
   }
@@ -71,7 +71,7 @@ export default function ItemProductCheckout({ index, product, size, color, quant
         </div>
         <div className=' w-2/12'>
           <div className=' text-sm h-full fcenter'>
-            <span className=' font-bold'>S/ {product.price*quantity}</span>
+            <span className=' font-bold'>S/ {product.price * quantity}</span>
           </div>
         </div>
         <div className=' w-1/12'>

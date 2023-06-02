@@ -61,4 +61,7 @@ body {
    .triangulo {
       @apply border-t-[8px] border-t-gray-500 border-r-[4px] border-r-transparent border-l-[4px] border-l-transparent
    }
+   .gradientA {
+    @apply bg-gradient-to-t from-gray-200
+   }
 }
