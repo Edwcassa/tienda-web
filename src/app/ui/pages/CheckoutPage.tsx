@@ -4,6 +4,7 @@ import ItemProductCheckout from '../components/ItemProductCheckout'
 import ProductUsecase from '../../modules/productUsecase'
 import { ProductResponseBody } from '../../api/interfaces/product/product-reponse-body'
 import { ItemLocalCart } from '../../api/interfaces/cart/localCart.interface'
+import Modal from '../components/shared/Modal'
 
 export default function CheckoutPage () {
   const navigate = useNavigate()
@@ -18,6 +19,8 @@ export default function CheckoutPage () {
   const [error, setError] = useState(false)
 
   const [step, setStep] = useState('products')
+
+  const [viewModal, setViewModal] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -284,13 +287,54 @@ export default function CheckoutPage () {
                       Anterior
                     </button>
 
-                    <button className=' button'>
+                    <button onClick={() => setViewModal(true)} className=' button'>
                       Pagar
                     </button>
                   </div>
                 </div>
 
               </div>
+
+              <Modal
+                visible={viewModal}
+                setVisible={setViewModal}
+              >
+                <div className='flex flex-1 h-full'>
+                  <div className='w-6/12 p-2  bg-[#f5f5f5] fcenter'>
+
+                    <div className=' w-56 h-[85%] rounded-3xl bg-white border-2 border-gray-400'>
+                      <div className=' w-full h-[10%]  fcenter'>
+                        <p className=' w-14 h-2 border-gray-400 border rounded-xl' />
+                      </div>
+                      <div className='phone w-full h-[80%]  overflow-auto'>
+                        {/* <input
+                          type='file'
+                          accept='.jpg, .jpeg, .png, .webp'
+                        /> */}
+                        <img src='/src/assets/pago.jpg' alt='' className=' px-2' draggable='false' />
+                      </div>
+                      <div className=' w-full h-[10%]  fcenter'>
+                        <p className=' w-9 h-9 rounded-full border border-gray-400' />
+                      </div>
+                    </div>
+                  </div>
+                  <div className='w-6/12'>
+                    <div className=' px-10'>
+                      <h2 className=' font-HM text-3xl leading-normal text-center mt-14'>Verificación</h2>
+                      <p className=' font-HM font-bold leading-normal text-center my-6'>
+                        Verificaremos tu imagen para asegurar un proceso seguro. Puede tomar algo más de tiempo, pero agradecemos tu paciencia y confianza.
+                      </p>
+                      <span>E-mail</span>
+                      <div className='border border-black mt-2'>
+                        <input className='flex w-full h-full py-3 pl-3 outline-none' type='text' />
+                      </div>
+                      <button className='boton w-full mt-5'>
+                        SUSCRIBIRME
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
 
             </>
           )
