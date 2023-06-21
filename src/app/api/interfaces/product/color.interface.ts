@@ -1,5 +1,6 @@
 export interface Color {
   colorName: string
-  colorImages: string[]
+  colorImage: string
+  images: string[]
   _id: string
 }

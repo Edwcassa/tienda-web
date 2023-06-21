@@ -36,7 +36,7 @@ export default function ProductDetailsPage (): JSX.Element {
     setColorSelected(color)
     const allColors = product?.colors
     const imagesByColor = allColors?.filter((colorProduct) => colorProduct.colorName === color) ?? []
-    setImagesByColor(imagesByColor[0].colorImages)
+    setImagesByColor(imagesByColor[0].images)
   }
 
   const handleChangeSize = (size: string) => {
@@ -49,7 +49,7 @@ export default function ProductDetailsPage (): JSX.Element {
       setLoading(true)
       const response = await ProductUsecase.getProduct(idProduct)
       setProduct(response.product)
-      setImagesByColor(response.product.colors[0].colorImages)
+      setImagesByColor(response.product.colors[0].images)
     } catch (error: any) {
       setError(error)
     } finally {
@@ -105,7 +105,7 @@ export default function ProductDetailsPage (): JSX.Element {
                   />
                   <label className='form-check-label' htmlFor={`radio_color${index}`}>
                     <img
-                      src={color.colorImages[5]} alt={color.colorName}
+                      src={color.colorImage} alt={color.colorName}
                       className={`w-20 object-cover cursor-pointer ${color.colorName === colorSelected && ' border-solid border-[1px] border-black '}`}
                     />
                   </label>
