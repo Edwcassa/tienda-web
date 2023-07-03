@@ -53,7 +53,7 @@ body {
      @apply border-solid border-2 border-blue-600;
    }
    .button {
-      @apply bg-[#00ca8d] text-white px-3 py-3 font-semibold active:text-gray-300 rounded-sm
+      @apply bg-[#000] text-white px-3 py-3 font-semibold active:text-gray-300 rounded-sm
    }
    .fcenter {
       @apply flex justify-center items-center

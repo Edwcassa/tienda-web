@@ -144,3 +144,11 @@
   border-radius: 2px;
 }
 
+.slick-list {
+  padding: 0 0px 0 0px !important;
+}
+
+.slick-list * {
+  border: none;
+  outline: none;
+}

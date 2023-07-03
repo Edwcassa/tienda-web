@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ProductUsecase from '../../modules/productUsecase'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Product } from '../../api/interfaces/product/product.interface'
 import MyContext from '../../../context/MyContext'
 import Skeleton from '../components/skeleton/Skeleton'
+import SliderImages from '../components/SliderImages'
 
 export default function ProductDetailsPage (): JSX.Element {
   const [product, setProduct] = useState<Product | null>(null)
@@ -82,16 +83,19 @@ export default function ProductDetailsPage (): JSX.Element {
   if (product) {
     return (
       <>
-        <div className='flex'>
-          <div className='w-[50%] h-[80%]'>
-            {/* <span>{colorSelected}</span>
-            <span>{sizeSelected}</span> */}
-            <img src={imagesByColor[0]} alt={product.title} className='w-full h-full object-cover' />
+        <div className='flex sm:bordeB flex-col sm:flex-row'>
+          <div>
+            <div className=' sm:hidden'>
+              <SliderImages data={imagesByColor} />
+            </div>
+            <div className='w-full h-full hidden sm:block'>
+              <img src={imagesByColor[0]} alt={product.title} className='w-full h-full object-cover' />
+            </div>
           </div>
-          <article className='w-[50%] p-10 font-Modern'>
-            <p className=' font-semibold text-3xl mb-2'>{product.title}</p>
+          <article className='w-full p-3 md:p-5 lg:p-10 font-Modern'>
+            <p className=' font-semibold text-xl md:text-xl lg:text-3xl mb-2'>{product.title}</p>
             <small className=' text-gray-500'>Ref {product.code}</small>
-            <p className='font-bold text-lg mt-2'>S/ {product.price}</p>
+            <p className='font-bold text-xl mt-2'>S/ {product.price}</p>
             <br />
 
             <div className=' flex '>
@@ -128,7 +132,7 @@ export default function ProductDetailsPage (): JSX.Element {
                       onChange={(e) => handleChangeSize(e.target.value)}
                       checked={sizeSelected === e}
                     />
-                    <label className='form-check-label' htmlFor={`radio_size${i}`}>
+                    <label className='form-check-label bg-transparent' htmlFor={`radio_size${i}`}>
                       <span
                         className={`w-10 h-10 grid place-content-center rounded-full border-[1px] cursor-pointer
                                   border-gray-400 hover:border-gray-600
@@ -160,13 +164,19 @@ export default function ProductDetailsPage (): JSX.Element {
               <button onClick={() => handleAddToCart(product, colorSelected, sizeSelected)} className=' button w-56'>
                 AÑADIR A LA CESTA
               </button>
+              <Link to='/hombre'>
+                <div className=' flex items-center justify-center bg-slate-100 p-[0.38rem] px-5 rounded-sm ml-2'>
+                  <img width={30} src='/src/assets/whatsapp.svg' alt='' />
+                  <p className=' ml-2 font-Design'>Chat</p>
+                </div>
+              </Link>
 
             </div>
 
           </article>
         </div>
 
-        <div className=' mt-2 grid gap-2 grid-cols-3 grid-flow-row'>
+        <div className=' mt-2 grid gap-2 grid-cols-2 grid-flow-row sm:grid-cols-3'>
           {
             imagesByColor.slice(1).map((image, index) => (
               <img src={image} key={index} className=' object-cover' />

@@ -10,7 +10,7 @@ interface ItemProductSidebarProps {
 export default function ItemProductSidebar ({ index, product }: ItemProductSidebarProps): JSX.Element {
   const { deleteToCart, increaseQuantityCart, calculateResume } = useContext(MyContext)
 
-  function onchange(event: any) {
+  function onchange (event: any) {
     increaseQuantityCart(product, parseInt(event.target.value))
     calculateResume()
   }
@@ -18,7 +18,7 @@ export default function ItemProductSidebar ({ index, product }: ItemProductSideb
   return (
     <div className=' flex mb-8 '>
       <div className='w-4/12'>
-        <img src={product.color?.colorImages[0]} alt='' />
+        <img src={product.color?.images[0]} alt='' />
       </div>
       <div className=' w-6/12 pl-2'>
         <p className=' font-semibold my-2'>{product.title}</p>
