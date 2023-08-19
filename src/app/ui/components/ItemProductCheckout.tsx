@@ -45,7 +45,7 @@ export default function ItemProductCheckout ({ index, product, size, color, quan
         <pre>{JSON.stringify(cartProduct.color?.colorName, undefined, 2)}</pre> */}
         <div className='w-7/12'>
           <div className=' h-full flex items-center'>
-            <img width={100} src={color?.colorImages[0]} alt='' />
+            <img width={100} src={color?.colorImage[0]} alt='' />
             <div className=' pr-10 ml-5'>
               <p className=' font-bold mb-3 text-sm'>
                 {product.title}

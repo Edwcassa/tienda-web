@@ -266,7 +266,7 @@ export default function CheckoutPage () {
                         productsCheckout.map((product, index) => (
                           <div key={index} className=' flex pb-2'>
                             <div className=' relative'>
-                              <img width={50} className=' h-full object-cover' src={cart[index].color?.colorImages[0]} alt='' />
+                              <img width={50} className=' h-full object-cover' src={cart[index].color?.colorImage[0]} alt='' />
                               <small className=' absolute top-0 -left-2 rounded-full border-[1px] border-gray-300 bg-white w-4 h-4 text-center'>{cart[index].quantity}</small>
                             </div>
                             <div className=' w-full mx-3'>
