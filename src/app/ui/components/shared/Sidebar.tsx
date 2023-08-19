@@ -11,6 +11,26 @@ export default function Sidebar (): JSX.Element {
 
   const navigate = useNavigate()
 
+  const generateWhatsappMessage = () => {
+    const customText = 'Hola, estoy interesado en estos productos.\n'
+
+    const local = window.localStorage.getItem('cart_shopping')
+    const cartItems = local ? JSON.parse(local) : []
+
+    const whatsappMessages = cartItems.map((product: ItemLocalCart) => {
+      const { url, color, size } = product
+      return `${url}\n${color?.colorName} ${size}\n`
+    })
+
+    const fullMessage = `${customText}${whatsappMessages.join('\n')}`
+
+    const encodedMessage = encodeURIComponent(fullMessage)
+
+    const whatsappUrl = `https://wa.me/51930265689?text=${encodedMessage}`
+
+    return whatsappUrl
+  }
+
   useEffect(() => {
     setItemProducts(JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]'))
     calculateResume()
@@ -68,9 +88,12 @@ export default function Sidebar (): JSX.Element {
               <span>S/ {resumeCart.toFixed(2)}</span>
             </div>
             <p className=' my-5 text-xs font-bold block'>Simula el costo de envío en el siguiente paso.</p>
-            <button className=' button w-full' onClick={() => navigate('/checkout')}>
-              <span className=' font-bold'>COMPRAR AHORA</span>
-            </button>
+            <a href={generateWhatsappMessage()} target='_blank' rel='noreferrer'>
+              <div className=' flex items-center justify-center bg-slate-200 hover:bg-slate-300 p-[0.38rem] px-5 rounded-sm ml-2'>
+                <img width={30} src='/src/assets/whatsapp.svg' alt='' />
+                <p className=' ml-2 font-Design'>Chat</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>

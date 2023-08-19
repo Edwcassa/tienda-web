@@ -9,7 +9,7 @@ interface MyContextProps {
   countCartProducts: number
   updateCountCart: () => void
   deleteToCart: (index: number) => void
-  addToCart: (product: Product, colorName: string, size: string) => void
+  addToCart: (product: Product, colorName: string, size: string, url: string) => void
   increaseQuantityCart: (product: ItemLocalCart, quantity: number) => void
   calculateResume: () => void
 
@@ -28,7 +28,7 @@ export const initialContextValue: MyContextProps = {
   countCartProducts: 0,
   updateCountCart: () => { },
   deleteToCart: (index: number) => { },
-  addToCart: (product: Product, colorName: string, size: string) => { },
+  addToCart: (product: Product, colorName: string, size: string, url: string) => { },
   increaseQuantityCart: (product: ItemLocalCart, quantity: number) => { },
   calculateResume: () => { },
 
@@ -59,13 +59,13 @@ export const MyContextProvider = ({ children }: MyContextProviderProps) => {
 
   const deleteToCart = (indexProductoEliminar: number) => {
     const carrito = JSON.parse(window.localStorage.getItem('cart_shopping') ?? '[]')
-    carrito.splice(indexProductoEliminar, 1);
+    carrito.splice(indexProductoEliminar, 1)
     setValue(carrito)
     updateCountCart()
     calculateResume()
   }
 
-  function addToCart(product: Product, colorName: string, size: string) {
+  function addToCart (product: Product, colorName: string, size: string, url: string) {
     try {
       if (product) {
         const item = JSON.parse(localStorage.getItem('cart_shopping') ?? '[]')
@@ -74,6 +74,7 @@ export const MyContextProvider = ({ children }: MyContextProviderProps) => {
           const colorObject = product.colors.find((e: Color) => e.colorName === colorName) ?? null
           const productCart: ItemLocalCart = {
             _id: product._id,
+            url,
             code: product.code,
             title: product.title,
             price: product.price,
@@ -90,15 +91,17 @@ export const MyContextProvider = ({ children }: MyContextProviderProps) => {
     }
   }
 
-  function increaseQuantityCart(productCart: ItemLocalCart, quantity: number) {
+  function increaseQuantityCart (productCart: ItemLocalCart, quantity: number) {
     const cart = JSON.parse(localStorage.getItem('cart_shopping') ?? '[]')
     const updatedCartItems = cart.map((item: ItemLocalCart) =>
       item._id === productCart._id &&
-        item.color?.colorName == productCart.color?.colorName &&
-        item.size == productCart.size ? { ...item, quantity: quantity } : item
-    );
+        item.color?.colorName === productCart.color?.colorName &&
+        item.size === productCart.size
+        ? { ...item, quantity }
+        : item
+    )
 
-    setValue(updatedCartItems);
+    setValue(updatedCartItems)
   }
 
   const calculateResume = () => {

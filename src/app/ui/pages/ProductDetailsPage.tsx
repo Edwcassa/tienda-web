@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ProductUsecase from '../../modules/productUsecase'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Product } from '../../api/interfaces/product/product.interface'
 import MyContext from '../../../context/MyContext'
 import Skeleton from '../components/skeleton/Skeleton'
@@ -20,15 +20,22 @@ export default function ProductDetailsPage (): JSX.Element {
   const [colorSelected, setColorSelected] = useState<string>('')
   const [sizeSelected, setSizeSelected] = useState<string>('')
 
-  const [formRequired, setFormRequired] = useState<string | null>(null)
+  const [formRequired, setFormRequired] = useState<string | null>('')
+
+  // const currentUrl = window.location.href
+  const currentUrl = 'https://edwdev.netlify.app/'
+
+  const customText = 'Hola, estoy interesado en este productos.\n'
+
+  const whatsappUrl = `https://wa.me/51930265689?text=${encodeURIComponent(`${customText}\n${currentUrl}\n${colorSelected ?? ''}`)}`
 
   const handleAddToCart = (product: Product, colorSelected: string, sizeSelected: string) => {
     if (colorSelected === '') {
-      setFormRequired('Seleccione un color')
+      setFormRequired(() => 'Seleccione un color')
     } else if (sizeSelected === '') {
-      setFormRequired('Seleccione una talla')
+      setFormRequired(() => 'Seleccione una talla')
     } else {
-      addToCart(product, colorSelected, sizeSelected)
+      addToCart(product, colorSelected, sizeSelected, window.location.href)
     }
   }
 
@@ -51,10 +58,18 @@ export default function ProductDetailsPage (): JSX.Element {
       const response = await ProductUsecase.getProduct(idProduct)
       setProduct(response.product)
       setImagesByColor(response.product.colors[0].images)
+      setOgImagePageAfterImagesSet(response.product)
     } catch (error: any) {
       setError(error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const setOgImagePageAfterImagesSet = (product: Product) => {
+    const ogImage: any = document.querySelector('meta[property="og:image"]')
+    if (ogImage) {
+      ogImage.content = product.colors[0].images[0]
     }
   }
 
@@ -83,8 +98,8 @@ export default function ProductDetailsPage (): JSX.Element {
   if (product) {
     return (
       <>
-        <div className='flex sm:bordeB flex-col sm:flex-row'>
-          <div>
+        <div className='flex flex-col sm:flex-row'>
+          <div className='w-full'>
             <div className=' sm:hidden'>
               <SliderImages data={imagesByColor} />
             </div>
@@ -118,9 +133,10 @@ export default function ProductDetailsPage (): JSX.Element {
               )}
             </div>
 
-            <p className=' text-sm font-semibold my-5'>Selecciona talla
-              {formRequired && <span className='text-red-500 ml-3'> * {formRequired}</span>}
-            </p>
+            <div className='flex items-center'>
+              <p className=' text-sm font-semibold my-5 mr-3'>Selecciona talla</p>
+              {formRequired && <span onAnimationEnd={() => setFormRequired('')} className={`text-red-500 ml-3, ${formRequired !== null ? 'shakeX' : ''}`}> * {formRequired}</span>}
+            </div>
 
             <div className='flex flex-row my-3'>
               {
@@ -164,13 +180,12 @@ export default function ProductDetailsPage (): JSX.Element {
               <button onClick={() => handleAddToCart(product, colorSelected, sizeSelected)} className=' button w-56'>
                 AÑADIR A LA CESTA
               </button>
-              <Link to='/hombre'>
+              <a href={whatsappUrl} target='_blank' rel='noreferrer'>
                 <div className=' flex items-center justify-center bg-slate-100 p-[0.38rem] px-5 rounded-sm ml-2'>
                   <img width={30} src='/src/assets/whatsapp.svg' alt='' />
                   <p className=' ml-2 font-Design'>Chat</p>
                 </div>
-              </Link>
-
+              </a>
             </div>
 
           </article>
