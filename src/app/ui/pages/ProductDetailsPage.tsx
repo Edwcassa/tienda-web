@@ -182,7 +182,7 @@ export default function ProductDetailsPage (): JSX.Element {
               </button>
               <a href={whatsappUrl} target='_blank' rel='noreferrer'>
                 <div className=' flex items-center justify-center bg-slate-100 p-[0.38rem] px-5 rounded-sm ml-2'>
-                  <img width={30} src='/src/assets/whatsapp.svg' alt='' />
+                  <img width={30} src='https://i.ibb.co/HDFn5qw/whatsapp-1.png' alt='' />
                   <p className=' ml-2 font-Design'>Chat</p>
                 </div>
               </a>
