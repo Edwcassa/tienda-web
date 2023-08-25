@@ -73,7 +73,8 @@ export default function ProductDetailsPage (): JSX.Element {
     const ogImageType: any = document.querySelector('meta[property="og:image:type"]')
     const ogImageTitle: any = document.querySelector('meta[property="og:title"]')
     if (ogImage) {
-      ogImage.content = product.colors[0].images[0]
+      // ogImage.content = product.colors[0].images[0]
+      ogImage.content = 'https://cuevana3.nu/wp-content/uploads/2023/08/k5SOA4ewxgZvj917PDhzJCXrHgf.jpg'
     }
     if (ogImageW) {
       ogImageW.content = 1080
@@ -84,7 +85,7 @@ export default function ProductDetailsPage (): JSX.Element {
     }
 
     if (ogImageType) {
-      ogImageType.content = 'image/webp'
+      ogImageType.content = 'image/jpeg'
     }
 
     if (ogImageTitle) {
