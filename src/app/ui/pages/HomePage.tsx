@@ -1,8 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Banner from '../components/banner/Banner'
 import Banner02 from '../components/banner/Banner02'
 
 export default function HomePage () {
+  const setOgImagePageAfterImagesSet = () => {
+    const ogImage: any = document.querySelector('meta[property="og:image"]')
+    const ogImageW: any = document.querySelector('meta[property="og:image:width"]')
+    const ogImageH: any = document.querySelector('meta[property="og:image:height"]')
+    const ogImageType: any = document.querySelector('meta[property="og:image:type"]')
+    const ogImageTitle: any = document.querySelector('meta[property="og:title"]')
+    if (ogImage) {
+      ogImage.content = 'https://cuevana3.nu/wp-content/uploads/2023/05/logo-cuevana-3.png'
+    }
+    if (ogImageW) {
+      ogImageW.content = 240
+    }
+
+    if (ogImageH) {
+      ogImageH.content = 60
+    }
+
+    if (ogImageType) {
+      ogImageType.content = 'image/png'
+    }
+
+    if (ogImageTitle) {
+      ogImageTitle.content = 'Bershka Peru'
+    }
+  }
+
+  useEffect(() => {
+    setOgImagePageAfterImagesSet()
+  }, [])
+
   return (
     <>
       <h3 className=' font-Design text-center text-2xl font-semibold'>Las tendencias del momento</h3>

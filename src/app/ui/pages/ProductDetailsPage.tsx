@@ -22,8 +22,7 @@ export default function ProductDetailsPage (): JSX.Element {
 
   const [formRequired, setFormRequired] = useState<string | null>('')
 
-  // const currentUrl = window.location.href
-  const currentUrl = 'https://edwdev.netlify.app/'
+  const currentUrl = window.location.href
 
   const customText = 'Hola, estoy interesado en este productos.\n'
 
@@ -60,6 +59,7 @@ export default function ProductDetailsPage (): JSX.Element {
       setImagesByColor(response.product.colors[0].images)
       setOgImagePageAfterImagesSet(response.product)
     } catch (error: any) {
+      console.log(error)
       setError(error)
     } finally {
       setLoading(false)
@@ -68,8 +68,27 @@ export default function ProductDetailsPage (): JSX.Element {
 
   const setOgImagePageAfterImagesSet = (product: Product) => {
     const ogImage: any = document.querySelector('meta[property="og:image"]')
+    const ogImageW: any = document.querySelector('meta[property="og:image:width"]')
+    const ogImageH: any = document.querySelector('meta[property="og:image:height"]')
+    const ogImageType: any = document.querySelector('meta[property="og:image:type"]')
+    const ogImageTitle: any = document.querySelector('meta[property="og:title"]')
     if (ogImage) {
       ogImage.content = product.colors[0].images[0]
+    }
+    if (ogImageW) {
+      ogImageW.content = 1080
+    }
+
+    if (ogImageH) {
+      ogImageH.content = 1600
+    }
+
+    if (ogImageType) {
+      ogImageType.content = 'image/webp'
+    }
+
+    if (ogImageTitle) {
+      ogImageTitle.content = product.title
     }
   }
 
